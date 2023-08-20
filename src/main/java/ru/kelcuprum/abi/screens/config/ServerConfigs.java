@@ -19,13 +19,13 @@ public class ServerConfigs {
         category.option(Option.createBuilder(boolean.class)
                 .description(OptionDescription.createBuilder().text(Localization.getText("abi.server.show_address.tooltip")).build())
                 .name(Localization.getText("abi.server.show_address"))
-                .binding(true, () -> ServerConfig.SHOW_ADDRESS,newVal -> ServerConfig.SHOW_ADDRESS = newVal)
+                .binding(false, () -> ServerConfig.SHOW_ADDRESS,newVal -> ServerConfig.SHOW_ADDRESS = newVal)
                 .controller(BooleanControllerBuilderImpl::new)
                 .build());
         category.option(Option.createBuilder(boolean.class)
                 .description(OptionDescription.createBuilder().text(Localization.getText("abi.server.show_name_in_list.tooltip")).build())
                 .name(Localization.getText("abi.server.show_name_in_list"))
-                .binding(false, () -> ServerConfig.SHOW_NAME_IN_LIST,newVal -> ServerConfig.SHOW_NAME_IN_LIST = newVal)
+                .binding(true, () -> ServerConfig.SHOW_NAME_IN_LIST,newVal -> ServerConfig.SHOW_NAME_IN_LIST = newVal)
                 .controller(BooleanControllerBuilderImpl::new)
                 .build());
         category.option(Option.createBuilder(boolean.class)
