@@ -164,7 +164,9 @@ public class Localization {
             parsedText = parsedText.replace("%sps%", "%fps%");
             parsedText = parsedText.replace("%fps%", String.valueOf(MinecraftAccess.getFPS()));
             parsedText = parsedText.replace("%world%", World.getName());
+            parsedText = parsedText.replace("%world_time_type%", World.getTimeType());
             parsedText = parsedText.replace("%world_time%", World.getTime());
+            parsedText = parsedText.replace("%time_type%", World.getTimeType());
             parsedText = parsedText.replace("%time%", World.getTime());
         }
         try{

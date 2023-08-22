@@ -4,7 +4,7 @@
   "abi.key.openConfig": "Открыть конфиги",
   "abi.key.toggle": "Переключение триггера",
 
-  "abi.info": "&6XYZ:&r %x% %y% %z% &6%directionSymbol% %time_format%&r",
+  "abi.info": "&6XYZ:&r %x% %y% %z% &6%directionSymbol% %time%&r",
   "abi.localization.info": "Формат информации",
 
   "abi.localization": "Локализация",
@@ -40,7 +40,7 @@
   "abi.localization.date.format": "Формат даты и времени",
   "abi.date": "MM/dd/yy",
   "abi.localization.date": "Формат даты",
-  "abi.date.time": "hh:mm",
+  "abi.date.time": "HH:mm",
   "abi.localization.date.time": "Формат времени",
 
   "abi.north": "Север",

@@ -3,8 +3,13 @@ package ru.kelcuprum.abi.info;
 import net.minecraft.client.Minecraft;
 import ru.kelcuprum.abi.config.Localization;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class World {
-    public static String getTime(){
+    public static String getTimeType(){
         Minecraft CLIENT = Minecraft.getInstance();
         if(CLIENT.level == null) return "";
         long currentTime = CLIENT.level.getDayTime() % 24000;
@@ -19,6 +24,27 @@ public class World {
         } else {
             return "";
         }
+    }
+    public static String getTime(){
+        Minecraft CLIENT = Minecraft.getInstance();
+        long daytime = CLIENT.level.getDayTime()+6000;
+
+        int hours=(int) (daytime / 1000)%24;
+        int minutes = (int) ((daytime % 1000)*60/1000);
+        int day = (int) daytime / 1000 / 24;
+        String clock;
+        try {
+            String strDateFormat = Localization.getLocalization("date.time", false);
+            DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+            Calendar calendar = new GregorianCalendar();
+            calendar.set(2000, 0, day+1, hours, minutes, 0);
+
+            clock = dateFormat.format(calendar.getTimeInMillis());
+        } catch (IllegalArgumentException ex) {
+            clock = "illegal clock format; google for Java SimpleDateFormat";
+        }
+        return clock;
+
     }
     public static String getCodeName(){
         Minecraft CLIENT = Minecraft.getInstance();

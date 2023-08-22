@@ -4,7 +4,7 @@
   "abi.key.openConfig": "Open configs",
   "abi.key.toggle": "Toggle trigger",
 
-  "abi.info": "&6XYZ:&r %x% %y% %z% &6%directionSymbol% %time_format%&r",
+  "abi.info": "&6XYZ:&r %x% %y% %z% &6%directionSymbol% %time%&r",
   "abi.localization.info": "Information format",
 
   "abi.localization": "Localization",
@@ -40,7 +40,7 @@
   "abi.localization.date.format": "Date & Time format",
   "abi.date": "MM/dd/yy",
   "abi.localization.date": "Date format",
-  "abi.date.time": "hh:mm",
+  "abi.date.time": "HH:mm",
   "abi.localization.date.time": "Time format",
 
   "abi.north": "North",

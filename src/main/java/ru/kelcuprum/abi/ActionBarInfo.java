@@ -78,7 +78,7 @@ public class ActionBarInfo implements ClientModInitializer {
             public void run() {
                 if(UserConfig.ENABLE_AB_INFORMATION) update();
             }
-        }, 250, 250);
+        }, 20, 20); //250, 250);
     }
     public static void update(){
         try{

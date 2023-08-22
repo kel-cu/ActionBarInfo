@@ -63,7 +63,8 @@ Substitute | Content
 %gamma% | Current gamma value
 %fps% | Frames per second
 %world% | World
-%world_time%, %time% | Morning, Day, Evening, Night
+%world_time_type%, %time_type% | Morning, Day, Evening, Night
+%world_time%, %time% | Digital time variant
 %date% | Date
 %date_format% | Date format.
 %time_format% | Time format.
