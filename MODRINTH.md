@@ -15,7 +15,7 @@ Display information on the action bar, showing player information.<br>
 
 ### Screenshots
 <details>
-<summary>Coordinates, side of the world, real time</summary>
+<summary>Coordinates, side of the world, world time</summary>
 
 ![en_main.png](https://kelcuprum.ru/ass/abi/en_main.png)
 

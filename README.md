@@ -15,7 +15,7 @@
 
 ### Скриншоты
 <details>
-<summary>Координаты, сторона света, реальное время</summary>
+<summary>Координаты, сторона света, время мира</summary>
 
 ![main.png](https://kelcuprum.ru/ass/abi/main.png)
 
