@@ -41,33 +41,36 @@
 <details>
 <summary>Доступные заменители</summary>
 
-Заменитель | Контент
---- | ---
-%version% | Версия игры
-%modded% | Загрузчик модов
-%version_type% | Тип версии
-%name% | Никнейм
-%item% | Предмет
-%item_name% | Название предмета
-%item_count% | Кол-во предмета
-%item_pcs% | Формат кол-во предмета
-%x%, %y%, %z% | Координаты
-%direction% | Сторона света
-%directionSymbol% | Буква стороны света
-%scene% | Одиночка или мультиплеер
-%address% | Адрес сервера
-%health% | Текущее здоровье
-%health_max% | Макс. кол-во здоровья [без учёта яблок*]
-%health_percent% | Процент здоровья
-%armor% | Кол-во брони
-%xp% | Опыт
-%gamma% | Текущее значение гаммы
-%fps% | Кол-во кадров в секунду
-%world% | Мир
-%world_time_type%, %time_type% | Утро, День, Вечер, Ночь
-%world_time%, %time% | Цифровой вариант
-%date% | Дата
-%date_format% | Формат. даты
-%time_format% |  Формат. времени
+Формат заменителя локализации: `{type}`, `{type.additional}`
+
+- minecraft
+  - version
+  - loader
+- fps
+- time
+- player
+  - name
+  - health
+  - health_max
+  - health_percent
+  - armor
+  - direction
+  - direction_symbol
+  - hunger
+  - pos
+    - x
+    - y
+    - z
+  - item
+  - item_count
+  - xp
+    - level
+    - progress
+    - total
+- world
+  - name
+  - time
+  - time_type
+  - difficulty
 
 </details>

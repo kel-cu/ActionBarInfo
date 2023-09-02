@@ -1,0 +1,69 @@
+{
+  "abi.name": "Action Bar Info",
+
+  "abi.key.openConfig": "Открыть конфиги",
+  "abi.key.toggle": "Переключение триггера",
+
+  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time}&r",
+  "abi.localization.info": "Формат информации",
+
+  "abi.localization": "Локализация",
+  "abi.config": "Конфигурация",
+  "abi.config.enable_ab_information": "Включить Action Bar Info",
+  "abi.config.enable_ab_information.tooltip": "Отображение информации об игроке на панели действий",
+  "abi.config.use_extended_coordinates": "Использовать расширенные координатыs",
+  "abi.config.use_extended_coordinates.tooltip": "Нормальное: x y z\nРасширенное: x.xx y.yy z.zz",
+  "abi.config.view_item_off_hand": "Показать предмет второй руки",
+  "abi.config.view_item_off_hand.tooltip": "Показывает предмет которую вы держите во второй руке, при условии что у первой ничего нет",
+  "abi.config.render_in_debug_screen": "Рендеринг в экране отладки",
+  "abi.config.type_render_action_bar": "Тип рендера",
+  "abi.config.type_render_action_bar.tooltip": "От зависимости рендера зависит расположение вывода информации. ABI Render это вывод информации выше стандартной функции ",
+  "abi.config.intend_x": "Отступ по X",
+  "abi.config.intend_x.tooltip": "Отступ от края экрана по X координате",
+  "abi.config.intend_y": "Отступ по Y",
+  "abi.config.intend_y.tooltip": "Отступ от края экрана по Y координате",
+
+  "abi.server": "Текущий сервер",
+  "abi.server.show_address": "Показать адрес",
+  "abi.server.show_address.tooltip": "Показывает адрес сервера, либо название",
+  "abi.server.show_name_in_list": "Показать название из списка",
+  "abi.server.show_name_in_list.tooltip": "Показывает название сервера из списка серверов",
+  "abi.server.show_custom_name": "Показывать кастомное название",
+  "abi.server.show_custom_name.tooltip": "Своё название сервера, если из списка серверов не подходит",
+  "abi.server.custom_name": "Кастомное название",
+  "abi.server.custom_name.tooltip": "Кастомное название BrorLOSINGhisSanity",
+
+  "abi.item.format": "%item_name% %item_pcs%",
+  "abi.localization.item.format": "Формат предмета",
+  "abi.item.format.count": "%item_count% шт.",
+  "abi.localization.format.count": "Формат кол-во предмета",
+
+  "abi.address.hidden": "Кофе?",
+  "abi.localization.address.hidden": "Скрытый адрес",
+  "abi.singleplayer": "Одиночка",
+  "abi.localization.singleplayer": "Одиночка",
+
+  "abi.date.format": "%time_format%",
+  "abi.localization.date.format": "Формат даты и времени",
+  "abi.date": "MM/dd/yy",
+  "abi.localization.date": "Формат даты",
+  "abi.date.time": "HH:mm",
+  "abi.localization.date.time": "Формат времени",
+
+  "abi.north": "Север",
+  "abi.south": "Юг",
+  "abi.west": "Запад",
+  "abi.east": "Восток",
+  "abi.unknown": "Неизвестно",
+
+  "abi.localization.north": "Север",
+  "abi.localization.south": "Юг",
+  "abi.localization.west": "Запад",
+  "abi.localization.east": "Восток",
+  "abi.localization.unknown": "Неизвестно",
+
+  "modmenu.descriptionTranslation.actionbarinfo": "Отображение информации на панели действий",
+  "modmenu.actionbarinfo.github": "GitHub",
+  "modmenu.actionbarinfo.modrinth": "Modrinth",
+  "modmenu.actionbarinfo.donate": "DonationAlerts"
+}

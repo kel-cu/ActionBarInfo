@@ -70,3 +70,40 @@ Substitute | Content
 %time_format% | Time format.
 
 </details>
+
+<details>
+<summary>[BETA] Available substitutes</summary>
+
+Localization replacement format: `{type}`, `{type.additional}`
+
+- minecraft
+    - version
+    - loader
+- fps
+- time
+- player
+    - name
+    - health
+    - health_max
+    - health_percent
+    - armor
+    - direction
+    - direction_symbol
+    - hunger
+    - pos
+        - x
+        - y
+        - z
+    - item
+    - item_count
+    - xp
+        - level
+        - progress
+        - total
+- world
+    - name
+    - time
+    - time_type
+    - difficulty
+
+</details>
