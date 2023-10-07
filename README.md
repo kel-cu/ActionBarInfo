@@ -72,5 +72,17 @@
   - time
   - time_type
   - difficulty
+- note_block
+  - note
+  - instrument
+  - powered
+- entity
+  - name
+  - health
+  - health_max
+  - health_percent
+  - x
+  - y
+  - z
 
 </details>
