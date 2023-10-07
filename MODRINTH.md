@@ -40,40 +40,6 @@ Yes, the mod supports the possibility of custom localization. All types can be f
 <details>
 <summary>Available substitutes</summary>
 
-Substitute | Content
---- | ---
-%version% | Game Version
-%modded% | Mod Loader
-%version_type% | Version type
-%name% | Nickname
-%item% | Item
-%item_name% | Item name
-%item_count% | Items counts
-%item_pcs% | Item quantity format
-%x%, %y%, %z% | Coordinates
-%direction% | Side of light
-%directionSymbol% | Side of Light letter
-%scene% | Single or Multiplayer
-%address% | Server address
-%health% | Current health
-%health_max% | Max health [not including apples*]
-%health_percent% | Percentage of health
-%armor% | Armor
-%xp% | Experience
-%gamma% | Current gamma value
-%fps% | Frames per second
-%world% | World
-%world_time_type%, %time_type% | Morning, Day, Evening, Night
-%world_time%, %time% | Digital time variant
-%date% | Date
-%date_format% | Date format.
-%time_format% | Time format.
-
-</details>
-
-<details>
-<summary>[BETA] Available substitutes</summary>
-
 Localization replacement format: `{type}`, `{type.additional}`
 
 - minecraft
@@ -105,5 +71,18 @@ Localization replacement format: `{type}`, `{type.additional}`
     - time
     - time_type
     - difficulty
+- note_block
+  - note
+  - instrument
+  - powered
+- entity
+  - name
+  - health
+  - health_max
+  - health_percent
+  - x
+  - y
+  - z
+
 
 </details>
