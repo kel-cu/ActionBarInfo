@@ -3,12 +3,10 @@ package ru.kelcuprum.abi.screens.config;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.impl.controller.StringControllerBuilderImpl;
-import net.minecraft.client.Minecraft;
 import ru.kelcuprum.abi.localization.Localization;
 
 public class LocalizationConfigs {
     public ConfigCategory getCategory() {
-        Minecraft CLIENT = Minecraft.getInstance();
         ConfigCategory.Builder category = ConfigCategory.createBuilder()
                 .name(Localization.getText("abi.localization"));
         category.option(Option.createBuilder(String.class)
@@ -32,13 +30,6 @@ public class LocalizationConfigs {
                         newVal -> Localization.setLocalization("singleplayer", newVal))
                 .controller(StringControllerBuilderImpl::new)
                 .build());
-//        category.option(Option.createBuilder(String.class)
-//                .name(Localization.getText("abi.localization.date.format"))
-//                .binding(Localization.getLcnDefault("date.format"),
-//                        () -> Localization.getLocalization("date.format", false, false),
-//                        newVal -> Localization.setLocalization("date.format", newVal))
-//                .controller(StringControllerBuilderImpl::new)
-//                .build());
         category.option(Option.createBuilder(String.class)
                 .name(Localization.getText("abi.localization.date.time"))
                 .binding(Localization.getLcnDefault("date.time"),

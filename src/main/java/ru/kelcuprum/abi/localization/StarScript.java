@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.abi.ActionBarInfo;
+import ru.kelcuprum.abi.info.Entity;
 import ru.kelcuprum.abi.info.Player;
 import ru.kelcuprum.abi.info.World;
 import ru.kelcuprum.abi.info.block.NoteBlock;
@@ -35,6 +36,16 @@ public class StarScript {
         ss.set("minecraft", new ValueMap()
                 .set("version", SharedConstants.getCurrentVersion().getName())
                 .set("loader", Minecraft.getInstance().getVersionType())
+        );
+        ss.set("entity", new ValueMap()
+                .set("name", () -> Value.string(Entity.isTargetEntity ? Entity.name : ""))
+                .set("custom_name", () -> Value.string(Entity.isTargetEntity ? Entity.customName : ""))
+                .set("x", () -> Value.string(Entity.isTargetEntity ? Entity.x : ""))
+                .set("y", () -> Value.string(Entity.isTargetEntity ? Entity.y : ""))
+                .set("z", () -> Value.string(Entity.isTargetEntity ? Entity.z : ""))
+                .set("health_percent", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.healthPercent*100) : ""))
+                .set("health_max", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.healthMax) : ""))
+                .set("health", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.health) : ""))
         );
         ss.set("fps", () -> Value.number(mc.getFps()));
         ss.set("time", () -> Value.string(new SimpleDateFormat(Localization.getLocalization("date.time", false)).format(System.currentTimeMillis())));

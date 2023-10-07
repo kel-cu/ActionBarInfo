@@ -11,8 +11,6 @@ import ru.kelcuprum.abi.screens.config.LocalizationConfigs;
 import ru.kelcuprum.abi.screens.config.MainConfigs;
 import ru.kelcuprum.abi.screens.config.ServerConfigs;
 
-import java.text.DecimalFormat;
-
 public class ConfigScreen {
     public static Screen buildScreen (Screen currentScreen) {
         Minecraft CLIENT = Minecraft.getInstance();

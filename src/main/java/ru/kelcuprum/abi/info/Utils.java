@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Utils {
-    private static final int codes = 22;
+    private static final int codes = 23;
     private static final Map<String, String> formatCodes = IntStream.range(0, codes)
             .boxed()
             .collect(Collectors.toMap(List.of(new String[]{
                     "&4", "&c", "&6", "&e", "&z", "&a", "&b", "&3", "&1", "&9", "&d", "&5", "&f", "&7", "&8", "&0",
-                    "&r", "&l", "&o", "&n", "&m", "&k"
+                    "&r", "&l", "&o", "&n", "&m", "&k", "&x"
             })::get, List.of(new String[]{
                     "§4", "§c", "§6", "§e", "§z", "§a", "§b", "§3", "§1", "§9", "§d", "§5", "§f", "§7", "§8", "§0",
-                    "§r", "§l", "§o", "§n", "§m", "§k"
+                    "§r", "§l", "§o", "§n", "§m", "§k", "§x"
             })::get));
 
     public static String clearFormatCodes(String text) {

@@ -35,7 +35,6 @@ public class ActionBarInfo implements ClientModInitializer {
     public static Boolean yetAnotherConfigLibV3 = FabricLoader.getInstance().getModContainer("yet_another_config_lib_v3").isPresent();
     @Override
     public void onInitializeClient() {
-        log("ЭТОТ МОД НЕ ЯВЛЯЕТСЯ ОФИЦИАЛЬНЫМ [ПРОДУКТОМ/УСЛУГОЙ/СОБЫТИЕМ И т.п.] MINECRAFT. НЕ ОДОБРЕНО И НЕ СВЯЗАНО С КОМПАНИЕЙ MOJANG ИЛИ MICROSOFT", Level.WARN);
         StarScript.init();
         if(yetAnotherConfigLibV3){
             KeyMapping openConfigKeyBind;
@@ -83,7 +82,7 @@ public class ActionBarInfo implements ClientModInitializer {
             public void run() {
                 if(UserConfig.ENABLE_AB_INFORMATION && (UserConfig.TYPE_RENDER_ACTION_BAR == 0 || UserConfig.TYPE_RENDER_ACTION_BAR >5)) update();
             }
-        }, 20, 20); //250, 250);
+        }, 20, 20);
     }
     public static void update(){
         try{
@@ -96,7 +95,7 @@ public class ActionBarInfo implements ClientModInitializer {
             if(lastException != null) lastException = null;
         } catch (Exception ex){
             if(lastException == null || !lastException.equals(ex.getMessage())){
-                ex.printStackTrace();
+                log(ex.getMessage(), Level.ERROR);
                 lastException = ex.getMessage();
             }
         }

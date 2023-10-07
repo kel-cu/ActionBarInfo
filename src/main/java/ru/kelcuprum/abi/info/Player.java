@@ -29,10 +29,10 @@ public class Player {
         if(main_hand_item.equals("air") && UserConfig.VIEW_ITEM_OFF_HAND){
             ItemStack off_hand = CLIENT.player.getItemInHand(InteractionHand.OFF_HAND);
             String off_hand_item = off_hand.getItem().toString();
-            if(off_hand_item.equals("air") || off_hand.getHoverName() == null) return 0;
+            if(off_hand_item.equals("air")) return 0;
             else return off_hand.getCount();
         } else {
-            if(main_hand_item.equals("air") || main_hand.getHoverName() == null) return 0;
+            if(main_hand_item.equals("air")) return 0;
             else return main_hand.getCount();
         }
     }
