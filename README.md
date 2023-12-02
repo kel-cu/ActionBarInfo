@@ -8,7 +8,9 @@
 <br>
 
 Отображение информации на панели действий, показывающий информацию игрока.<br>
-*Сделано для любомого сообщества Pepeland ❤*
+[![pepeland](https://kelcuprum.ru/ass/budge/pepeland/сделано%20для/cozy_vector.svg)](https://pepeland.net)
+![fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg)
+![quilt](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/quilt_vector.svg)
 
 </div>
 <div align=left>
