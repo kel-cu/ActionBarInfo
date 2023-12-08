@@ -1,0 +1,40 @@
+{
+  "abi.name": "Action Bar Info",
+
+  "abi.key.openConfig": "Open configs",
+  "abi.key.toggle": "Toggle trigger",
+
+  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time}&r",
+  "abi.localization.info": "Information format",
+
+  "abi.localization": "Localization",
+  "abi.config": "Configuration",
+  "abi.config.enable_ab_information": "Enable Action Bar Info",
+  "abi.config.use_extended_coordinates": "Use extended coordinates",
+  "abi.config.view_item_off_hand": "View Item Off Hand",
+  "abi.config.render_in_debug_screen": "Render in debug screen",
+  "abi.config.type_render_action_bar": "Type of renderer",
+  "abi.config.intend_x": "X indentation",
+  "abi.config.intend_y": "Y indentation",
+  "abi.config.exit": "Exit",
+
+  "abi.date.time": "hh:mm",
+  "abi.localization.date.time": "Time format",
+
+  "abi.north": "North",
+  "abi.south": "South",
+  "abi.west": "West",
+  "abi.east": "East",
+  "abi.unknown": "Unknown",
+
+  "abi.localization.north": "North",
+  "abi.localization.south": "South",
+  "abi.localization.west": "West",
+  "abi.localization.east": "East",
+  "abi.localization.unknown": "Unknown",
+
+  "modmenu.descriptionTranslation.actionbarinfo": "Display info in action bar",
+  "modmenu.actionbarinfo.github": "GitHub",
+  "modmenu.actionbarinfo.modrinth": "Modrinth",
+  "modmenu.actionbarinfo.donate": "DonationAlerts"
+}
