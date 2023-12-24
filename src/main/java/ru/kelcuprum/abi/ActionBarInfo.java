@@ -63,7 +63,7 @@ public class ActionBarInfo implements ClientModInitializer {
         TIMER.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(config.getBoolean("ENABLE_AB_INFORMATION", true) && (config.getInt("TYPE_RENDER_ACTION_BAR", 0) == 0 || config.getInt("TYPE_RENDER_ACTION_BAR", 0) >5)) update();
+                if(config.getBoolean("ENABLE_AB_INFORMATION", true) && (config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() == 0 || config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() >5)) update();
             }
         }, 20, 20);
     }
