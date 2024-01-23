@@ -6,10 +6,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,9 +17,9 @@ import java.util.TimerTask;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
-import ru.kelcuprum.abi.localization.Localization;
 import ru.kelcuprum.abi.localization.StarScript;
 import ru.kelcuprum.alinlib.config.Config;
+import ru.kelcuprum.alinlib.config.Localization;
 
 public class ActionBarInfo implements ClientModInitializer {
     public static final String MOD_ID = "actionbarinfo";
@@ -32,10 +30,12 @@ public class ActionBarInfo implements ClientModInitializer {
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
     public static Config config = new Config("config/ActionBarInfo/config.json");
+    public static Localization localization = new Localization("abi", "config/ActionBarInfo/lang");
     @Override
     public void onInitializeClient() {
         config.load();
         StarScript.init();
+        localization.setParser((s) -> StarScript.run(StarScript.compile(s)));
         KeyMapping toggleKeyBind;
         toggleKeyBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "abi.key.toggle",
@@ -72,7 +72,7 @@ public class ActionBarInfo implements ClientModInitializer {
             Minecraft client = Minecraft.getInstance();
             if(client.level == null || client.player == null) return;
             client.player.displayClientMessage(Localization.toText(
-                    Localization.getLocalization("info", true, false)
+                    localization.getLocalization("info")
             ), true);
 
             if(lastException != null) lastException = null;
