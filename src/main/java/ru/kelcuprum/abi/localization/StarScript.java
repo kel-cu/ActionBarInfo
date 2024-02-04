@@ -37,6 +37,7 @@ public class StarScript {
         ss.set("minecraft", new ValueMap()
                 .set("version", SharedConstants.getCurrentVersion().getName())
                 .set("loader", Minecraft.getInstance().getVersionType())
+                .set("fps", () -> Value.number(mc.getFps()))
         );
         ss.set("entity", new ValueMap()
                 .set("name", () -> Value.string(Entity.isTargetEntity ? Entity.name : ""))
@@ -48,7 +49,6 @@ public class StarScript {
                 .set("health_max", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.healthMax, !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false)) : ""))
                 .set("health", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.health, !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false)) : ""))
         );
-        ss.set("fps", () -> Value.number(mc.getFps()));
         ss.set("time", () -> Value.string(new SimpleDateFormat(ActionBarInfo.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
         // Player
         ss.set("player", new ValueMap()
@@ -111,8 +111,13 @@ public class StarScript {
         }
     }
     public static String run(Script script, StringBuilder sb) {
-        Section section = runSection(script, sb);
-        return section != null ? section.toString() : null;
+        try {
+            Section section = runSection(script, sb);
+            return section == null ? "" : section.toString();
+        } catch (Exception e){
+            ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
+            return e.getLocalizedMessage();
+        }
     }
 
     public static Section runSection(Script script) {

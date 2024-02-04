@@ -46,7 +46,7 @@ public class World {
 
     }
     public static String getCodeName(){
-        return CLIENT.level.dimension().location().toString();
+        return CLIENT.level == null ? "abi:unknown" : CLIENT.level.dimension().location().toString();
     }
     public static String getName(){
         String world = getCodeName();
