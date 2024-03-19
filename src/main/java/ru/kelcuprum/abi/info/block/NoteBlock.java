@@ -57,7 +57,6 @@ public class NoteBlock {
                 Property<?> property = (Property)entry.getKey();
                 Comparable<?> comparable = (Comparable)entry.getValue();
                 String string = Util.getPropertyName(property, comparable);
-//                ActionBarInfo.log(property.getName() + " " + string);
                 if(property.getName().equals("note")) note = string;
                 else if(property.getName().equals("instrument")) instrument = string;
                 else if(property.getName().equals("powered")) powered = string;

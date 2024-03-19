@@ -32,8 +32,6 @@ public class HUDHandler implements HudRenderCallback, ClientTickEvents.StartTick
             ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
         }
     }
-    int i = 0;
-    int j = 0;
     @Override
     public void onHudRender(GuiGraphics guiGraphics, float tickDelta) {
         int pos = ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue();
