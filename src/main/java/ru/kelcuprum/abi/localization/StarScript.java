@@ -11,7 +11,6 @@ import meteordevelopment.starscript.utils.StarscriptError;
 import meteordevelopment.starscript.value.Value;
 import meteordevelopment.starscript.value.ValueMap;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.abi.ActionBarInfo;
@@ -22,13 +21,9 @@ import ru.kelcuprum.abi.info.block.NoteBlock;
 import ru.kelcuprum.alinlib.config.Localization;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class StarScript {
     public static Starscript ss = new Starscript();
-    static Minecraft mc = Minecraft.getInstance();
 
     public static void init() {
         StandardLib.init(ss);
@@ -36,8 +31,8 @@ public class StarScript {
         // General
         ss.set("minecraft", new ValueMap()
                 .set("version", SharedConstants.getCurrentVersion().getName())
-                .set("loader", Minecraft.getInstance().getVersionType())
-                .set("fps", () -> Value.number(mc.getFps()))
+                .set("loader", ActionBarInfo.MINECRAFT.getVersionType())
+                .set("fps", () -> Value.number(ActionBarInfo.MINECRAFT.getFps()))
         );
         ss.set("entity", new ValueMap()
                 .set("name", () -> Value.string(Entity.isTargetEntity ? Entity.name : ""))
@@ -52,35 +47,35 @@ public class StarScript {
         ss.set("time", () -> Value.string(new SimpleDateFormat(ActionBarInfo.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
         // Player
         ss.set("player", new ValueMap()
-                .set("name", () -> Value.string(mc.getUser().getName()))
-                .set("health", () -> Value.string(mc.player != null ? Player.getHealth() : ""))
-                .set("health_max", () -> Value.string(mc.player != null ? Player.getMaxHealth() : ""))
-                .set("health_percent", () -> Value.string(mc.player != null ? Player.getPercentHealth() : ""))
-                .set("armor", () -> Value.string(mc.player != null ? Player.getArmor() : ""))
-                .set("direction", () -> Value.string(mc.player != null ? Player.getDirection(false) : ""))
-                .set("direction_symbol", () -> Value.string(mc.player != null ? Player.getDirection(true) : ""))
-                .set("hunger", () -> Value.number(mc.player != null ? mc.player.getFoodData().getFoodLevel() : 0))
+                .set("name", () -> Value.string(ActionBarInfo.MINECRAFT.getUser().getName()))
+                .set("health", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getHealth() : ""))
+                .set("health_max", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getMaxHealth() : ""))
+                .set("health_percent", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getPercentHealth() : ""))
+                .set("armor", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getArmor() : ""))
+                .set("direction", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getDirection(false) : ""))
+                .set("direction_symbol", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getDirection(true) : ""))
+                .set("hunger", () -> Value.number(ActionBarInfo.MINECRAFT.player != null ? ActionBarInfo.MINECRAFT.player.getFoodData().getFoodLevel() : 0))
                 .set("pos", new ValueMap()
-                        .set("x", () -> Value.string(mc.player != null ? Player.getX() : ""))
-                        .set("y", () -> Value.string(mc.player != null ? Player.getY() : ""))
-                        .set("z", () -> Value.string(mc.player != null ? Player.getZ() : ""))
+                        .set("x", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getX() : ""))
+                        .set("y", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getY() : ""))
+                        .set("z", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getZ() : ""))
                 )
 
-                .set("item", () -> Value.string(mc.player != null ? Player.getItemName() : ""))
-                .set("item_count", () -> Value.number(mc.player != null ? Player.getItemCount() : 0))
+                .set("item", () -> Value.string(ActionBarInfo.MINECRAFT.player != null ? Player.getItemName() : ""))
+                .set("item_count", () -> Value.number(ActionBarInfo.MINECRAFT.player != null ? Player.getItemCount() : 0))
 
                 .set("xp", new ValueMap()
-                        .set("level", () -> Value.number(mc.player != null ? mc.player.experienceLevel : 0))
-                        .set("progress", () -> Value.number(mc.player != null ? mc.player.experienceProgress : 0))
-                        .set("total", () -> Value.number(mc.player != null ? mc.player.totalExperience : 0))
+                        .set("level", () -> Value.number(ActionBarInfo.MINECRAFT.player != null ? ActionBarInfo.MINECRAFT.player.experienceLevel : 0))
+                        .set("progress", () -> Value.number(ActionBarInfo.MINECRAFT.player != null ? ActionBarInfo.MINECRAFT.player.experienceProgress : 0))
+                        .set("total", () -> Value.number(ActionBarInfo.MINECRAFT.player != null ? ActionBarInfo.MINECRAFT.player.totalExperience : 0))
                 )
         );
         // World
         ss.set("world", new ValueMap()
-                .set("name", () -> Value.string(mc.level != null ? World.getName() : ""))
-                .set("time_type", () -> Value.string(mc.level != null ? World.getTimeType() : ""))
-                .set("time", () -> Value.string(mc.level != null ? World.getTime() : ""))
-                .set("difficulty", () -> Value.string(mc.level != null ? mc.level.getDifficulty().getDisplayName().getString() : ""))
+                .set("name", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? World.getName() : ""))
+                .set("time_type", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? World.getTimeType() : ""))
+                .set("time", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? World.getTime() : ""))
+                .set("difficulty", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? ActionBarInfo.MINECRAFT.level.getDifficulty().getDisplayName().getString() : ""))
         );
         ss.set("note_block", new ValueMap()
                 .set("note", () -> Value.string(NoteBlock.getIsNoteBlock() ? NoteBlock.getNote() : "-"))

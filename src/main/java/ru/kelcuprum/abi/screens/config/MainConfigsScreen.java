@@ -1,7 +1,5 @@
 package ru.kelcuprum.abi.screens.config;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.abi.ActionBarInfo;
@@ -9,14 +7,12 @@ import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
-import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxLocalization;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 
 public class MainConfigsScreen {
-    private static final Component TITLE = Localization.getText("abi.name");
     // CATEGORYES
     private static final Component MainConfigCategory = Localization.getText("abi.config");
     private static final Component LocalizationConfigCategory = Localization.getText("abi.localization");
@@ -34,26 +30,26 @@ public class MainConfigsScreen {
         String[] types = {
                 "Default",
                 "ABI Render",
-                "Bottom left",
-                "Bottom right",
                 "Top left",
-                "Top right"
+                "Top right",
+                "Bottom left",
+                "Bottom right"
         };
         return new ConfigScreenBuilder(parent, Component.translatable("abi.name"), designType)
                 .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> {
-                    Minecraft.getInstance().setScreen(new MainConfigsScreen().build(parent));
+                    ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent));
                 }))
                 .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> {
-                    Minecraft.getInstance().setScreen(new LocalizationConfigsScreen().build(parent));
+                    ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent));
                 }))
-                .addWidget(new TextBox(140, 15, MainConfigCategory, true))
+                .addWidget(new TextBox(140, 5, MainConfigCategory, true))
                 .addWidget(new ButtonConfigBoolean(140, 30, designType, ActionBarInfo.config, "ENABLE_AB_INFORMATION", true, enableABIText))
                 .addWidget(new ButtonConfigBoolean(140, 55, designType, ActionBarInfo.config, "VIEW_ITEM_OFF_HAND", false, viewItemOffHandText))
                 .addWidget(new ButtonConfigBoolean(140, 80, designType, ActionBarInfo.config, "USE_EXTENDED_COORDINATES", false, useExtendedCoordinatesText))
                 .addWidget(new SelectorIntegerButton(140, 105, designType, types, ActionBarInfo.config, "TYPE_RENDER_ACTION_BAR", 0, typeRenderABIText))
                 .addWidget(new SliderConfigInteger(140, 130, designType, ActionBarInfo.config, "INDENT_X", 20, 5, 100, indentXText))
                 .addWidget(new SliderConfigInteger(140, 155, designType, ActionBarInfo.config, "INDENT_Y", 20, 5, 100, indentYText))
-                .addWidget(new ButtonConfigBoolean(140, 40, designType, ActionBarInfo.config, "RENDER_IN_DEBUG_SCREEN", false, renderInDebugScreenText))
+                .addWidget(new ButtonConfigBoolean(140, 180, designType, ActionBarInfo.config, "RENDER_IN_DEBUG_SCREEN", false, renderInDebugScreenText))
                 .build();
     }
 }

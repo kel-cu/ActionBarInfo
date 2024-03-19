@@ -1,6 +1,5 @@
 package ru.kelcuprum.abi.info;
 
-import net.minecraft.client.Minecraft;
 import ru.kelcuprum.abi.ActionBarInfo;
 
 import java.text.DateFormat;
@@ -9,10 +8,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class World {
-    static Minecraft CLIENT = Minecraft.getInstance();
     public static String getTimeType(){
-        if(CLIENT.level == null) return "";
-        long currentTime = CLIENT.level.getDayTime() % 24000;
+        if(ActionBarInfo.MINECRAFT.level == null) return "";
+        long currentTime = ActionBarInfo.MINECRAFT.level.getDayTime() % 24000;
         if (currentTime < 6000 && currentTime > 0) {
             return ActionBarInfo.localization.getLocalization("time.morning", false, false);
         } else if (currentTime < 12000 && currentTime > 6000) {
@@ -26,7 +24,7 @@ public class World {
         }
     }
     public static String getTime(){
-        long daytime = CLIENT.level.getDayTime()+6000;
+        long daytime = ActionBarInfo.MINECRAFT.level.getDayTime()+6000;
 
         int hours=(int) (daytime / 1000)%24;
         int minutes = (int) ((daytime % 1000)*60/1000);
@@ -46,7 +44,7 @@ public class World {
 
     }
     public static String getCodeName(){
-        return CLIENT.level == null ? "abi:unknown" : CLIENT.level.dimension().location().toString();
+        return ActionBarInfo.MINECRAFT.level == null ? "abi:unknown" : ActionBarInfo.MINECRAFT.level.dimension().location().toString();
     }
     public static String getName(){
         String world = getCodeName();

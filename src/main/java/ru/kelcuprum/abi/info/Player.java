@@ -1,6 +1,5 @@
 package ru.kelcuprum.abi.info;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -8,12 +7,11 @@ import ru.kelcuprum.abi.ActionBarInfo;
 import ru.kelcuprum.alinlib.config.Localization;
 
 public class Player {
-    static Minecraft CLIENT = Minecraft.getInstance();
     public static String getItemName(){
-        ItemStack main_hand = CLIENT.player.getItemInHand(InteractionHand.MAIN_HAND);
+        ItemStack main_hand = ActionBarInfo.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
         String main_hand_item = main_hand.getItem().toString();
         if(main_hand_item.equals("air") && ActionBarInfo.config.getBoolean("VIEW_ITEM_OFF_HAND", false)){
-            ItemStack off_hand = CLIENT.player.getItemInHand(InteractionHand.OFF_HAND);
+            ItemStack off_hand = ActionBarInfo.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
             String off_hand_item = off_hand.getItem().toString();
             if(off_hand_item.equals("air") || off_hand.getHoverName() == null) return null;
             else return off_hand.getHoverName().getString();
@@ -23,10 +21,10 @@ public class Player {
         }
     }
     public static int getItemCount(){
-        ItemStack main_hand = CLIENT.player.getItemInHand(InteractionHand.MAIN_HAND);
+        ItemStack main_hand = ActionBarInfo.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
         String main_hand_item = main_hand.getItem().toString();
         if(main_hand_item.equals("air") && ActionBarInfo.config.getBoolean("VIEW_ITEM_OFF_HAND", false)){
-            ItemStack off_hand = CLIENT.player.getItemInHand(InteractionHand.OFF_HAND);
+            ItemStack off_hand = ActionBarInfo.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
             String off_hand_item = off_hand.getItem().toString();
             if(off_hand_item.equals("air")) return 0;
             else return off_hand.getCount();
@@ -36,28 +34,28 @@ public class Player {
         }
     }
     public static String getHealth(){
-        return ActionBarInfo.DF.format(CLIENT.player.getHealth()/2);
+        return ActionBarInfo.DF.format(ActionBarInfo.MINECRAFT.player.getHealth()/2);
     }
     public static String getMaxHealth(){
-        return ActionBarInfo.DF.format(CLIENT.player.getMaxHealth()/2);
+        return ActionBarInfo.DF.format(ActionBarInfo.MINECRAFT.player.getMaxHealth()/2);
     }
     public static String getPercentHealth(){
-        return ActionBarInfo.DF.format((CLIENT.player.getHealth()*100)/CLIENT.player.getMaxHealth());
+        return ActionBarInfo.DF.format((ActionBarInfo.MINECRAFT.player.getHealth()*100)/ActionBarInfo.MINECRAFT.player.getMaxHealth());
     }
     public static String getArmor(){
-        return ActionBarInfo.DF.format(CLIENT.player.getArmorValue()/2);
+        return ActionBarInfo.DF.format(ActionBarInfo.MINECRAFT.player.getArmorValue()/2);
     }
     public static String getX(){
-        return Localization.getRounding(CLIENT.getCameraEntity().getX(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getRounding(ActionBarInfo.MINECRAFT.getCameraEntity().getX(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
     }
     public static String getY(){
-        return Localization.getRounding(CLIENT.getCameraEntity().getY(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getRounding(ActionBarInfo.MINECRAFT.getCameraEntity().getY(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
     }
     public static String getZ(){
-        return Localization.getRounding(CLIENT.getCameraEntity().getZ(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getRounding(ActionBarInfo.MINECRAFT.getCameraEntity().getZ(), !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false));
     }
     public static String getDirection(boolean oneSymbol){
-        Direction direction = CLIENT.player.getDirection();
+        Direction direction = ActionBarInfo.MINECRAFT.player.getDirection();
         return switch (direction) {
             case NORTH -> oneSymbol ? "N" : ActionBarInfo.localization.getLocalization("north", false, false);
             case SOUTH -> oneSymbol ? "S" : ActionBarInfo.localization.getLocalization("south", false, false);

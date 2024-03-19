@@ -4,7 +4,6 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import ru.kelcuprum.abi.ActionBarInfo;
 import ru.kelcuprum.abi.screens.config.MainConfigsScreen;
 
 @Environment(EnvType.CLIENT)

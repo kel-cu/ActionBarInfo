@@ -1,6 +1,5 @@
 package ru.kelcuprum.abi.screens.config;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.abi.ActionBarInfo;
@@ -25,19 +24,19 @@ public class LocalizationConfigsScreen {
     public Screen build(Screen parent){
         return new ConfigScreenBuilder(parent, Component.translatable("abi.name"), designType)
                 .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> {
-                    Minecraft.getInstance().setScreen(new MainConfigsScreen().build(parent));
+                    ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent));
                 }))
                 .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> {
-                    Minecraft.getInstance().setScreen(new LocalizationConfigsScreen().build(parent));
+                    ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent));
                 }))
-                .addWidget(new TextBox(140, 15, LocalizationConfigCategory, true))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "info", infoText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "date.time", dateTimeText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "north", northText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "south", southText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "west", westText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "east", eastText))
-                .addWidget(new EditBoxLocalization(140, 40, designType, ActionBarInfo.localization, "unknown", unknownText))
+                .addWidget(new TextBox(140, 5, LocalizationConfigCategory, true))
+                .addWidget(new EditBoxLocalization(140, 30, designType, ActionBarInfo.localization, "info", infoText))
+                .addWidget(new EditBoxLocalization(140, 55, designType, ActionBarInfo.localization, "date.time", dateTimeText))
+                .addWidget(new EditBoxLocalization(140, 80, designType, ActionBarInfo.localization, "north", northText))
+                .addWidget(new EditBoxLocalization(140, 105, designType, ActionBarInfo.localization, "south", southText))
+                .addWidget(new EditBoxLocalization(140, 130, designType, ActionBarInfo.localization, "west", westText))
+                .addWidget(new EditBoxLocalization(140, 155, designType, ActionBarInfo.localization, "east", eastText))
+                .addWidget(new EditBoxLocalization(140, 180, designType, ActionBarInfo.localization, "unknown", unknownText))
                 .build();
     }
 }

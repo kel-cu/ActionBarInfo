@@ -2,13 +2,13 @@ package ru.kelcuprum.abi.info.block;
 
 import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import ru.kelcuprum.abi.ActionBarInfo;
 
 import java.util.Map;
 
@@ -38,16 +38,17 @@ public class NoteBlock {
     public static boolean getIsNoteBlock(){
         return isNoteBlock;
     }
+    @SuppressWarnings("rawtypes")
     public static void update(){
-        if(Minecraft.getInstance().getCameraEntity() == null){ clear(); return;}
-        if(Minecraft.getInstance().player == null){ clear(); return;}
-        block = Minecraft.getInstance().getCameraEntity().pick(20.0, 0.0F, false);
+        if(ActionBarInfo.MINECRAFT.getCameraEntity() == null){ clear(); return;}
+        if(ActionBarInfo.MINECRAFT.player == null){ clear(); return;}
+        block = ActionBarInfo.MINECRAFT.getCameraEntity().pick(20.0, 0.0F, false);
         BlockPos blockPos;
         UnmodifiableIterator var12;
         Map.Entry entry;
         if (block.getType() == HitResult.Type.BLOCK) {
             blockPos = ((BlockHitResult)block).getBlockPos();
-            BlockState blockState = Minecraft.getInstance().level.getBlockState(blockPos);
+            BlockState blockState = ActionBarInfo.MINECRAFT.level.getBlockState(blockPos);
             if(!String.valueOf(BuiltInRegistries.BLOCK.getKey(blockState.getBlock())).equals("minecraft:note_block")){ clear(); return;}
             isNoteBlock = true;
             var12 = blockState.getValues().entrySet().iterator();

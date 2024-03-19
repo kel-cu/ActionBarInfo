@@ -31,6 +31,7 @@ public class ActionBarInfo implements ClientModInitializer {
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
     public static Config config = new Config("config/ActionBarInfo/config.json");
     public static Localization localization = new Localization("abi", "config/ActionBarInfo/lang");
+    public static Minecraft MINECRAFT = Minecraft.getInstance();
     @Override
     public void onInitializeClient() {
         config.load();
@@ -69,10 +70,9 @@ public class ActionBarInfo implements ClientModInitializer {
     }
     public static void update(){
         try{
-            Minecraft client = Minecraft.getInstance();
-            if(client.level == null || client.player == null) return;
-            client.player.displayClientMessage(Localization.toText(
-                    localization.getLocalization("info")
+            if(MINECRAFT.level == null || MINECRAFT.player == null) return;
+            MINECRAFT.player.displayClientMessage(Localization.toText(
+                    localization.getLocalization("info").replace("\\\n", " ")
             ), true);
 
             if(lastException != null) lastException = null;

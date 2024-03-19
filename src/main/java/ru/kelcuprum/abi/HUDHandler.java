@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import org.apache.logging.log4j.Level;
 import ru.kelcuprum.abi.info.Entity;
 import ru.kelcuprum.abi.info.block.NoteBlock;
 import ru.kelcuprum.alinlib.config.Localization;
@@ -13,69 +14,49 @@ import ru.kelcuprum.alinlib.config.Localization;
 import java.util.List;
 
 public class HUDHandler implements HudRenderCallback, ClientTickEvents.StartTick {
-    private final List<Component> textList = new ObjectArrayList<>();
-
-    private final Minecraft client = Minecraft.getInstance();
+    private final List<Component> texts = new ObjectArrayList<>();
 
     @Override
     public void onStartTick(Minecraft client) {
-        NoteBlock.update();
-        Entity.update();
-        this.textList.clear();
-        if (!ActionBarInfo.config.getBoolean("ENABLE_AB_INFORMATION", true)) return;
-        if(ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() > 5) return;
-        String[] args = ActionBarInfo.localization.getLocalization("info").split("\\\\n");
-        for (String arg : args) {
-            this.textList.add(Localization.toText(arg));
+        try {
+            NoteBlock.update();
+            Entity.update();
+            this.texts.clear();
+            if (!ActionBarInfo.config.getBoolean("ENABLE_AB_INFORMATION", true)) return;
+            if(ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() > 5) return;
+            String[] args = ActionBarInfo.localization.getLocalization("info").split("\\\\n");
+            for (String arg : args) {
+                this.texts.add(Localization.toText(arg));
+            }
+        } catch (Exception e){
+            ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
         }
     }
+    int i = 0;
+    int j = 0;
     @Override
-    public void onHudRender(GuiGraphics drawContext, float tickDelta) {
-        if (ActionBarInfo.config.getBoolean("ENABLE_AB_INFORMATION", true)) {
-            int l = 0;
-            int x;
-            int y;
-            int width = drawContext.guiWidth();
-            int height = drawContext.guiHeight();
-            for (Component text : this.textList) {
-                switch (ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue()) {
-                    case 1 -> {
-                        x = (width / 2);
-                        y = height + this.client.font.lineHeight - (((textList.size()-l)*this.client.font.lineHeight)-2) - 85;
-                        this.drawString(drawContext, text, x, y, true);
-                    }
-                    case 2 -> {
-                        x = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
-                        y = height - (((textList.size()-l)*this.client.font.lineHeight)-2) - this.client.font.lineHeight - ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 3 -> {
-                        x = width - this.client.font.width(text) - ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
-                        y = height - (((textList.size()-l)*this.client.font.lineHeight)-2) - ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 4 -> {
-                        x = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
-                        y = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue() + ((l*this.client.font.lineHeight)+2);
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 5 -> {
-                        x = width - this.client.font.width(text) - ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
-                        y = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue() + ((l*this.client.font.lineHeight)+2);
-                        this.drawString(drawContext, text, x, y);
-                    }
+    public void onHudRender(GuiGraphics guiGraphics, float tickDelta) {
+        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue();
+        int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
+        int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
+        if(!texts.isEmpty()){
+            if(pos == 1){
+                int l = texts.size()-1;
+                int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
+                for(Component text : texts){
+                    guiGraphics.drawCenteredString(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-60-(l*f), -1);
+                    l--;
                 }
-                l++;
+            } else {
+                int l = pos == 2 || pos == 3 ? 0 : texts.size()-1;
+                int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
+                for(Component text : texts){
+                    int x = pos == 2 || pos == 4 ? ix : guiGraphics.guiWidth() - ix - (ActionBarInfo.MINECRAFT.font.width(text));
+                    int y = pos == 2 || pos == 3 ? iy+(l*f) : guiGraphics.guiHeight() - iy - ActionBarInfo.MINECRAFT.font.lineHeight - (l*f);
+                    guiGraphics.drawString(ActionBarInfo.MINECRAFT.font, text, x, y, -1);
+                    if(pos == 2 || pos == 3) l++; else l--;
+                }
             }
         }
-    }
-
-    private void drawString(GuiGraphics guiGraphics, Component text, int x, int y) {
-        this.drawString(guiGraphics, text, x, y, false);
-    }
-
-    private void drawString(GuiGraphics guiGraphics, Component text, int x, int y, boolean isCenter) {
-        if(isCenter) guiGraphics.drawCenteredString(this.client.font, text, x, y, 16777215);
-        else guiGraphics.drawString(this.client.font, text, x, y, 16777215);
     }
 }

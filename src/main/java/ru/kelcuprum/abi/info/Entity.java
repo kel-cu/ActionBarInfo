@@ -1,6 +1,5 @@
 package ru.kelcuprum.abi.info;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.LivingEntity;
 import ru.kelcuprum.abi.ActionBarInfo;
 import ru.kelcuprum.alinlib.config.Localization;
@@ -31,10 +30,10 @@ public class Entity {
         z = "";
     }
     public static void update(){
-        if(Minecraft.getInstance().getCameraEntity() == null){ clear(); return;}
-        if(Minecraft.getInstance().player == null && Minecraft.getInstance().crosshairPickEntity == null){ clear(); return;}
+        if(ActionBarInfo.MINECRAFT.getCameraEntity() == null){ clear(); return;}
+        if(ActionBarInfo.MINECRAFT.player == null && ActionBarInfo.MINECRAFT.crosshairPickEntity == null){ clear(); return;}
 
-        net.minecraft.world.entity.Entity entity = Minecraft.getInstance().crosshairPickEntity == null ? Minecraft.getInstance().cameraEntity : Minecraft.getInstance().crosshairPickEntity;
+        net.minecraft.world.entity.Entity entity = ActionBarInfo.MINECRAFT.crosshairPickEntity == null ? ActionBarInfo.MINECRAFT.cameraEntity : ActionBarInfo.MINECRAFT.crosshairPickEntity;
         if(entity instanceof LivingEntity livingEntity){
             isTargetEntity = true;
             health = livingEntity.getHealth();
