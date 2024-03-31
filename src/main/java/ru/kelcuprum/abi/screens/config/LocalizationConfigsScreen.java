@@ -23,12 +23,8 @@ public class LocalizationConfigsScreen {
     private static final InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
     public Screen build(Screen parent){
         return new ConfigScreenBuilder(parent, Component.translatable("abi.name"), designType)
-                .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> {
-                    ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent));
-                }))
-                .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> {
-                    ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent));
-                }))
+                .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent))))
+                .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent))))
                 .addWidget(new TextBox(140, 5, LocalizationConfigCategory, true))
                 .addWidget(new EditBoxLocalization(140, 30, designType, ActionBarInfo.localization, "info", infoText))
                 .addWidget(new EditBoxLocalization(140, 55, designType, ActionBarInfo.localization, "date.time", dateTimeText))

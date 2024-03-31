@@ -36,12 +36,8 @@ public class MainConfigsScreen {
                 "Bottom right"
         };
         return new ConfigScreenBuilder(parent, Component.translatable("abi.name"), designType)
-                .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> {
-                    ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent));
-                }))
-                .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> {
-                    ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent));
-                }))
+                .addPanelWidget(new Button(10, 40, 110, 20, designType, MainConfigCategory, (OnPress) -> ActionBarInfo.MINECRAFT.setScreen(new MainConfigsScreen().build(parent))))
+                .addPanelWidget(new Button(10, 65, 110, 20, designType, LocalizationConfigCategory, (OnPress) -> ActionBarInfo.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent))))
                 .addWidget(new TextBox(140, 5, MainConfigCategory, true))
                 .addWidget(new ButtonConfigBoolean(140, 30, designType, ActionBarInfo.config, "ENABLE_AB_INFORMATION", true, enableABIText))
                 .addWidget(new ButtonConfigBoolean(140, 55, designType, ActionBarInfo.config, "VIEW_ITEM_OFF_HAND", false, viewItemOffHandText))

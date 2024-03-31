@@ -2,10 +2,6 @@ package ru.kelcuprum.abi;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
@@ -18,11 +14,14 @@ import java.util.TimerTask;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.abi.localization.StarScript;
+import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
+import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
+import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
+import ru.kelcuprum.alinlib.api.keybinding.KeyBindingHelper;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 
 public class ActionBarInfo implements ClientModInitializer {
-    public static final String MOD_ID = "actionbarinfo";
     public static DecimalFormat DF = new DecimalFormat("#.##");
     public static final Logger LOG = LogManager.getLogger("Action Bar Info");
     private static final Timer TIMER = new Timer();
@@ -38,7 +37,7 @@ public class ActionBarInfo implements ClientModInitializer {
         StarScript.init();
         localization.setParser((s) -> StarScript.run(StarScript.compile(s)));
         KeyMapping toggleKeyBind;
-        toggleKeyBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        toggleKeyBind = KeyBindingHelper.registerKeyMapping(new KeyMapping(
                 "abi.key.toggle",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
@@ -56,7 +55,7 @@ public class ActionBarInfo implements ClientModInitializer {
             log("Client started!");
             start();
             HUDHandler hud = new HUDHandler();
-            HudRenderCallback.EVENT.register(hud);
+            GuiRenderEvents.RENDER.register(hud);
             ClientTickEvents.START_CLIENT_TICK.register(hud);
         }));
     }

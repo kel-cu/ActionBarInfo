@@ -14,11 +14,8 @@ import net.minecraft.SharedConstants;
 
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.abi.ActionBarInfo;
-import ru.kelcuprum.abi.info.Entity;
 import ru.kelcuprum.abi.info.Player;
 import ru.kelcuprum.abi.info.World;
-import ru.kelcuprum.abi.info.block.NoteBlock;
-import ru.kelcuprum.alinlib.config.Localization;
 
 import java.text.SimpleDateFormat;
 
@@ -33,16 +30,6 @@ public class StarScript {
                 .set("version", SharedConstants.getCurrentVersion().getName())
                 .set("loader", ActionBarInfo.MINECRAFT.getVersionType())
                 .set("fps", () -> Value.number(ActionBarInfo.MINECRAFT.getFps()))
-        );
-        ss.set("entity", new ValueMap()
-                .set("name", () -> Value.string(Entity.isTargetEntity ? Entity.name : ""))
-                .set("custom_name", () -> Value.string(Entity.isTargetEntity ? Entity.customName : ""))
-                .set("x", () -> Value.string(Entity.isTargetEntity ? Entity.x : ""))
-                .set("y", () -> Value.string(Entity.isTargetEntity ? Entity.y : ""))
-                .set("z", () -> Value.string(Entity.isTargetEntity ? Entity.z : ""))
-                .set("health_percent", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.healthPercent*100, !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false)) : ""))
-                .set("health_max", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.healthMax, !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false)) : ""))
-                .set("health", () -> Value.string(Entity.isTargetEntity ? Localization.getRounding(Entity.health, !ActionBarInfo.config.getBoolean("USE_EXTENDED_COORDINATES", false)) : ""))
         );
         ss.set("time", () -> Value.string(new SimpleDateFormat(ActionBarInfo.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
         // Player
@@ -77,11 +64,6 @@ public class StarScript {
                 .set("time", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? World.getTime() : ""))
                 .set("difficulty", () -> Value.string(ActionBarInfo.MINECRAFT.level != null ? ActionBarInfo.MINECRAFT.level.getDifficulty().getDisplayName().getString() : ""))
         );
-        ss.set("note_block", new ValueMap()
-                .set("note", () -> Value.string(NoteBlock.getIsNoteBlock() ? NoteBlock.getNote() : "-"))
-                .set("instrument", () -> Value.string(NoteBlock.getIsNoteBlock() ? NoteBlock.getInstrument() : "-"))
-                .set("powered", () -> Value.string(NoteBlock.getIsNoteBlock() ? NoteBlock.getPowered() : "-"))
-        );
     }
     // Helpers
 
@@ -101,7 +83,7 @@ public class StarScript {
             return ss.run(script, sb);
         }
         catch (StarscriptError error) {
-            error.printStackTrace();
+            ActionBarInfo.log(error.getLocalizedMessage(), Level.ERROR);
             return null;
         }
     }
@@ -115,9 +97,6 @@ public class StarScript {
         }
     }
 
-    public static Section runSection(Script script) {
-        return runSection(script, new StringBuilder());
-    }
     public static String run(Script script) {
         return run(script, new StringBuilder());
     }

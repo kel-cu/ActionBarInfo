@@ -24,6 +24,7 @@ public class World {
         }
     }
     public static String getTime(){
+        if(ActionBarInfo.MINECRAFT.level == null) return "";
         long daytime = ActionBarInfo.MINECRAFT.level.getDayTime()+6000;
 
         int hours=(int) (daytime / 1000)%24;
@@ -34,11 +35,11 @@ public class World {
             String strDateFormat = ActionBarInfo.localization.getLocalization("date.time", false, false);
             DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
             Calendar calendar = new GregorianCalendar();
-            calendar.set(2000, 0, day+1, hours, minutes, 0);
+            calendar.set(2000, Calendar.JANUARY, day+1, hours, minutes, 0);
 
             clock = dateFormat.format(calendar.getTimeInMillis());
         } catch (IllegalArgumentException ex) {
-            clock = "illegal clock format; google for Java SimpleDateFormat";
+            clock = "[It's not correct format for Java SimpleDateFormat]";
         }
         return clock;
 

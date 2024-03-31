@@ -1,26 +1,22 @@
 package ru.kelcuprum.abi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
-import ru.kelcuprum.abi.info.Entity;
-import ru.kelcuprum.abi.info.block.NoteBlock;
+import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
+import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Localization;
 
 import java.util.List;
 
-public class HUDHandler implements HudRenderCallback, ClientTickEvents.StartTick {
+public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     private final List<Component> texts = new ObjectArrayList<>();
 
     @Override
     public void onStartTick(Minecraft client) {
         try {
-            NoteBlock.update();
-            Entity.update();
             this.texts.clear();
             if (!ActionBarInfo.config.getBoolean("ENABLE_AB_INFORMATION", true)) return;
             if(ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() > 5) return;
@@ -33,7 +29,7 @@ public class HUDHandler implements HudRenderCallback, ClientTickEvents.StartTick
         }
     }
     @Override
-    public void onHudRender(GuiGraphics guiGraphics, float tickDelta) {
+    public void onRender(GuiGraphics guiGraphics, float tickDelta) {
         int pos = ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue();
         int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
         int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
