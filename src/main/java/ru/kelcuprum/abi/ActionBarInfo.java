@@ -7,13 +7,11 @@ import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
-import ru.kelcuprum.abi.localization.StarScript;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
@@ -22,7 +20,6 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 
 public class ActionBarInfo implements ClientModInitializer {
-    public static DecimalFormat DF = new DecimalFormat("#.##");
     public static final Logger LOG = LogManager.getLogger("Action Bar Info");
     private static final Timer TIMER = new Timer();
     private static String lastException;
@@ -34,8 +31,6 @@ public class ActionBarInfo implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         config.load();
-        StarScript.init();
-        localization.setParser((s) -> StarScript.run(StarScript.compile(s)));
         KeyMapping toggleKeyBind;
         toggleKeyBind = KeyBindingHelper.registerKeyMapping(new KeyMapping(
                 "abi.key.toggle",

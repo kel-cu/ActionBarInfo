@@ -18,20 +18,7 @@
   "abi.config.intend_y": "Y indentation",
   "abi.config.exit": "Exit",
 
-  "abi.date.time": "hh:mm",
-  "abi.localization.date.time": "Time format",
-
-  "abi.north": "North",
-  "abi.south": "South",
-  "abi.west": "West",
-  "abi.east": "East",
-  "abi.unknown": "Unknown",
-
-  "abi.localization.north": "North",
-  "abi.localization.south": "South",
-  "abi.localization.west": "West",
-  "abi.localization.east": "East",
-  "abi.localization.unknown": "Unknown",
+  "abi.localization.more": "More localization (AlinLib)",
 
   "modmenu.descriptionTranslation.actionbarinfo": "Display info in action bar",
   "modmenu.actionbarinfo.github": "GitHub",

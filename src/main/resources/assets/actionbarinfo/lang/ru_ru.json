@@ -18,20 +18,7 @@
   "abi.config.intend_y": "Отступ по Y",
   "abi.config.exit": "Выйти",
 
-  "abi.date.time": "HH:mm",
-  "abi.localization.date.time": "Формат времени",
-
-  "abi.north": "Север",
-  "abi.south": "Юг",
-  "abi.west": "Запад",
-  "abi.east": "Восток",
-  "abi.unknown": "Неизвестно",
-
-  "abi.localization.north": "Север",
-  "abi.localization.south": "Юг",
-  "abi.localization.west": "Запад",
-  "abi.localization.east": "Восток",
-  "abi.localization.unknown": "Неизвестно",
+  "abi.localization.more": "Больше локализации (AlinLib)",
 
   "modmenu.descriptionTranslation.actionbarinfo": "Отображение информации на панели действий",
   "modmenu.actionbarinfo.github": "GitHub",
