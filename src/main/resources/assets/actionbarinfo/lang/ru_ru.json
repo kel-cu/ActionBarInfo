@@ -16,6 +16,7 @@
   "abi.config.type_render_action_bar": "Тип рендера",
   "abi.config.intend_x": "Отступ по X",
   "abi.config.intend_y": "Отступ по Y",
+  "abi.config.intend_abi_y": "Отступ по Y (ABI Render)",
   "abi.config.exit": "Выйти",
 
   "abi.localization.more": "Больше локализации (AlinLib)",

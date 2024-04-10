@@ -18,10 +18,12 @@ public class MainConfigsScreen {
     private static final Component LocalizationConfigCategory = Localization.getText("abi.localization");
     // CATEGORY CONTENT
     private static final Component enableABIText = Localization.getText("abi.config.enable_ab_information");
+    private static final Component pwgoodMode = Localization.getText("abi.config.pwgood_mode");
     private static final Component viewItemOffHandText = Localization.getText("abi.config.view_item_off_hand");
     private static final Component useExtendedCoordinatesText = Localization.getText("abi.config.use_extended_coordinates");
     private static final Component typeRenderABIText = Localization.getText("abi.config.type_render_action_bar");
     private static final Component indentYText = Localization.getText("abi.config.intend_y");
+    private static final Component indentABIYText = Localization.getText("abi.config.intend_abi_y");
     private static final Component indentXText = Localization.getText("abi.config.intend_x");
     private static final Component renderInDebugScreenText = Localization.getText("abi.config.render_in_debug_screen");
     private static final InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
@@ -45,6 +47,7 @@ public class MainConfigsScreen {
                 .addWidget(new SelectorIntegerButton(140, 105, designType, types, ActionBarInfo.config, "TYPE_RENDER_ACTION_BAR", 0, typeRenderABIText))
                 .addWidget(new SliderConfigInteger(140, 130, designType, ActionBarInfo.config, "INDENT_X", 20, 5, 100, indentXText))
                 .addWidget(new SliderConfigInteger(140, 155, designType, ActionBarInfo.config, "INDENT_Y", 20, 5, 100, indentYText))
+                .addWidget(new SliderConfigInteger(140, 155, designType, ActionBarInfo.config, "INDENT_ABI_Y", 85, 5, 150, indentABIYText))
                 .addWidget(new ButtonConfigBoolean(140, 180, designType, ActionBarInfo.config, "RENDER_IN_DEBUG_SCREEN", false, renderInDebugScreenText))
                 .build();
     }

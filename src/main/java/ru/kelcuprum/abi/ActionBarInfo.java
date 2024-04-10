@@ -66,7 +66,7 @@ public class ActionBarInfo implements ClientModInitializer {
         try{
             if(MINECRAFT.level == null || MINECRAFT.player == null) return;
             MINECRAFT.player.displayClientMessage(Localization.toText(
-                    localization.getLocalization("info").replace("\\\n", " ")
+                    localization.getLocalization("info").replace("\\n", " ")
             ), true);
 
             if(lastException != null) lastException = null;

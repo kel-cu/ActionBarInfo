@@ -16,6 +16,7 @@
   "abi.config.type_render_action_bar": "Type of renderer",
   "abi.config.intend_x": "X indentation",
   "abi.config.intend_y": "Y indentation",
+  "abi.config.intend_abi_y": "Y indentation (ABI Render)",
   "abi.config.exit": "Exit",
 
   "abi.localization.more": "More localization (AlinLib)",

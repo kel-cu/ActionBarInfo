@@ -33,12 +33,13 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
         int pos = ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue();
         int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
         int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
+        int iay = ActionBarInfo.config.getNumber("INDENT_ABI_Y", 85).intValue();
         if(!texts.isEmpty()){
             if(pos == 1){
                 int l = texts.size()-1;
                 int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
                 for(Component text : texts){
-                    guiGraphics.drawCenteredString(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-60-(l*f), -1);
+                    guiGraphics.drawCenteredString(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-iay-(l*f), -1);
                     l--;
                 }
             } else {
