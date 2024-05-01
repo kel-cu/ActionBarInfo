@@ -18,7 +18,6 @@ public class MainConfigsScreen {
     private static final Component LocalizationConfigCategory = Localization.getText("abi.localization");
     // CATEGORY CONTENT
     private static final Component enableABIText = Localization.getText("abi.config.enable_ab_information");
-    private static final Component pwgoodMode = Localization.getText("abi.config.pwgood_mode");
     private static final Component viewItemOffHandText = Localization.getText("abi.config.view_item_off_hand");
     private static final Component useExtendedCoordinatesText = Localization.getText("abi.config.use_extended_coordinates");
     private static final Component typeRenderABIText = Localization.getText("abi.config.type_render_action_bar");
