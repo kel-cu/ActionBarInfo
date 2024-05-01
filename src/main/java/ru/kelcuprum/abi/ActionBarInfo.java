@@ -46,7 +46,6 @@ public class ActionBarInfo implements ClientModInitializer {
             }
         });
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
-            config.load();
             log("Client started!");
             start();
             HUDHandler hud = new HUDHandler();
