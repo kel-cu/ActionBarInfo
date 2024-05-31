@@ -2,6 +2,7 @@ package ru.kelcuprum.abi;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
@@ -12,10 +13,10 @@ import java.util.TimerTask;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
-import ru.kelcuprum.alinlib.api.keybinding.KeyBindingHelper;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 
@@ -32,10 +33,17 @@ public class ActionBarInfo implements ClientModInitializer {
     public void onInitializeClient() {
         config.load();
         KeyMapping toggleKeyBind;
-        toggleKeyBind = KeyBindingHelper.registerKeyMapping(new KeyMapping(
+        toggleKeyBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "abi.key.toggle",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
+                "abi.name"
+        ));
+        KeyMapping toggleStealth;
+        toggleStealth = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+                "alinlib.config.streamer.stealth",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_RIGHT_CONTROL, // The keycode of the key
                 "abi.name"
         ));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -43,6 +51,10 @@ public class ActionBarInfo implements ClientModInitializer {
             while (toggleKeyBind.consumeClick()) {
                 config.setBoolean("ENABLE_AB_INFORMATION", !config.getBoolean("ENABLE_AB_INFORMATION", true));
                 config.save();
+            }
+            while (toggleStealth.consumeClick()) {
+                AlinLib.bariumConfig.setBoolean("STREAMER.STEALTH", !AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false));
+                AlinLib.bariumConfig.save();
             }
         });
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
