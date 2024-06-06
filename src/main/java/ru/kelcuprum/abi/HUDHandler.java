@@ -18,8 +18,8 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     public void onStartTick(Minecraft client) {
         try {
             this.texts.clear();
-            if (!ActionBarInfo.config.getBoolean("ENABLE_AB_INFORMATION", true)) return;
-            if(ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() > 5) return;
+            if (!ActionBarInfo.config.getBoolean("ENABLE", true)) return;
+            if(ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue() > 5) return;
             String[] args = ActionBarInfo.localization.getLocalization("info").split("\\\\n");
             for (String arg : args) {
                 this.texts.add(Localization.toText(arg));
@@ -30,7 +30,7 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     }
     @Override
     public void onRender(GuiGraphics guiGraphics, float tickDelta) {
-        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue();
+        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue();
         int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
         int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
         int iay = ActionBarInfo.config.getNumber("INDENT_ABI_Y", 85).intValue();

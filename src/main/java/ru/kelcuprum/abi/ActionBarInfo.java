@@ -49,7 +49,7 @@ public class ActionBarInfo implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             assert client.player != null;
             while (toggleKeyBind.consumeClick()) {
-                config.setBoolean("ENABLE_AB_INFORMATION", !config.getBoolean("ENABLE_AB_INFORMATION", true));
+                config.setBoolean("ENABLE", !config.getBoolean("ENABLE", true));
                 config.save();
             }
             while (toggleStealth.consumeClick()) {
@@ -69,17 +69,14 @@ public class ActionBarInfo implements ClientModInitializer {
         TIMER.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(config.getBoolean("ENABLE_AB_INFORMATION", true) && (config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() == 0 || config.getNumber("TYPE_RENDER_ACTION_BAR", 0).intValue() >5)) update();
+                if(config.getBoolean("ENABLE", true) && (config.getNumber("TYPE_RENDER", 0).intValue() == 0 || config.getNumber("TYPE_RENDER", 0).intValue() >5)) update();
             }
         }, 20, 20);
     }
     public static void update(){
         try{
             if(MINECRAFT.level == null || MINECRAFT.player == null) return;
-            MINECRAFT.player.displayClientMessage(Localization.toText(
-                    localization.getLocalization("info").replace("\\n", " ")
-            ), true);
-
+            MINECRAFT.player.displayClientMessage(Localization.toText(localization.getLocalization("info").replace("\\n", " ")), true);
             if(lastException != null) lastException = null;
         } catch (Exception ex){
             if(lastException == null || !lastException.equals(ex.getMessage())){

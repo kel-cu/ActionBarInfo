@@ -8,7 +8,6 @@ import ru.kelcuprum.abi.screens.config.MainConfigsScreen;
 
 @Environment(EnvType.CLIENT)
 public class ModMenuIntegration implements ModMenuApi {
-
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return new MainConfigsScreen()::build;

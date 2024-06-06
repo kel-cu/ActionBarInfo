@@ -5,24 +5,17 @@
   "abi.key.toggle": "Переключение триггера",
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time}&r",
-  "abi.localization.info": "Формат информации",
 
-  "abi.localization": "Локализация",
   "abi.config": "Конфигурация",
   "abi.config.enable_ab_information": "Включить Action Bar Info",
-  "abi.config.use_extended_coordinates": "Использовать расширенные координаты",
-  "abi.config.view_item_off_hand": "Показать предмет второй руки",
-  "abi.config.render_in_debug_screen": "Рендеринг в экране отладки",
   "abi.config.type_render_action_bar": "Тип рендера",
   "abi.config.intend_x": "Отступ по X",
   "abi.config.intend_y": "Отступ по Y",
   "abi.config.intend_abi_y": "Отступ по Y (ABI Render)",
-  "abi.config.exit": "Выйти",
 
+  "abi.localization": "Локализация",
   "abi.localization.more": "Больше локализации (AlinLib)",
+  "abi.localization.info": "Формат информации",
 
-  "modmenu.descriptionTranslation.actionbarinfo": "Отображение информации на панели действий",
-  "modmenu.actionbarinfo.github": "GitHub",
-  "modmenu.actionbarinfo.modrinth": "Modrinth",
-  "modmenu.actionbarinfo.donate": "DonationAlerts"
+  "modmenu.descriptionTranslation.actionbarinfo": "Отображение информации на панели действий"
 }
