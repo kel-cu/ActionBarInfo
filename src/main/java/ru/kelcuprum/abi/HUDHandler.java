@@ -1,80 +1,57 @@
 package ru.kelcuprum.abi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.abi.info.Entity;
-import ru.kelcuprum.abi.info.block.NoteBlock;
-import ru.kelcuprum.abi.localization.Localization;
-import ru.kelcuprum.abi.config.UserConfig;
+import org.apache.logging.log4j.Level;
+import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
+import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
+import ru.kelcuprum.alinlib.config.Localization;
 
 import java.util.List;
 
-public class HUDHandler implements HudRenderCallback, ClientTickEvents.StartTick {
-    private final List<Component> textList = new ObjectArrayList<>();
-
-    private final Minecraft client = Minecraft.getInstance();
+public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
+    private final List<Component> texts = new ObjectArrayList<>();
 
     @Override
     public void onStartTick(Minecraft client) {
-        NoteBlock.update();
-        Entity.update();
-        this.textList.clear();
-        if (!UserConfig.ENABLE_AB_INFORMATION) return;
-        if(UserConfig.TYPE_RENDER_ACTION_BAR < 1 || UserConfig.TYPE_RENDER_ACTION_BAR > 5) return;
-        String[] args = Localization.getLocalization("info", true).split("\\\\n");
-        for (String arg : args) {
-            this.textList.add(Localization.toText(arg));
+        try {
+            this.texts.clear();
+            if (!ActionBarInfo.config.getBoolean("ENABLE", true)) return;
+            if(ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue() > 5) return;
+            String[] args = ActionBarInfo.localization.getLocalization("info").split("\\\\n");
+            for (String arg : args) {
+                this.texts.add(Localization.toText(arg));
+            }
+        } catch (Exception e){
+            ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
         }
     }
     @Override
-    public void onHudRender(GuiGraphics drawContext, float tickDelta) {
-        boolean isDebugOverlay = this.client.options.renderDebug;
-        if (UserConfig.ENABLE_AB_INFORMATION) {
-            int l = 0;
-            int x;
-            int y;
-            for (Component text : this.textList) {
-                switch (UserConfig.TYPE_RENDER_ACTION_BAR) {
-                    case 1 -> {
-                        x = (this.client.getWindow().getGuiScaledWidth() / 2) - (this.client.font.width(text) / 2);
-                        y = this.client.getWindow().getGuiScaledHeight() + this.client.font.lineHeight - (((textList.size()-l)*this.client.font.lineHeight)-2) - 85;
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 2 -> {
-                        if (isDebugOverlay && !UserConfig.RENDER_IN_DEBUG_SCREEN) return;
-                        x = UserConfig.INDENT_X;
-                        y = this.client.getWindow().getGuiScaledHeight() + this.client.font.lineHeight - (((textList.size()-l)*this.client.font.lineHeight)-2) - this.client.font.lineHeight - UserConfig.INDENT_Y;
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 3 -> {
-                        if (isDebugOverlay && !UserConfig.RENDER_IN_DEBUG_SCREEN) return;
-                        x = this.client.getWindow().getGuiScaledWidth() - this.client.font.width(text) - UserConfig.INDENT_X;
-                        y = this.client.getWindow().getGuiScaledHeight() + this.client.font.lineHeight - (((textList.size()-l)*this.client.font.lineHeight)-2) - UserConfig.INDENT_Y;
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 4 -> {
-                        if (isDebugOverlay && !UserConfig.RENDER_IN_DEBUG_SCREEN) return;
-                        x = UserConfig.INDENT_X;
-                        y = UserConfig.INDENT_Y + ((l*this.client.font.lineHeight)+2);
-                        this.drawString(drawContext, text, x, y);
-                    }
-                    case 5 -> {
-                        if (isDebugOverlay && !UserConfig.RENDER_IN_DEBUG_SCREEN) return;
-                        x = this.client.getWindow().getGuiScaledWidth() - this.client.font.width(text) - UserConfig.INDENT_X;
-                        y = UserConfig.INDENT_Y + ((l*this.client.font.lineHeight)+2);
-                        this.drawString(drawContext, text, x, y);
-                    }
+    public void onRender(GuiGraphics guiGraphics, float tickDelta) {
+        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue();
+        int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
+        int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
+        int iay = ActionBarInfo.config.getNumber("INDENT_ABI_Y", 85).intValue();
+        if(!texts.isEmpty()){
+            if(pos == 1){
+                int l = texts.size()-1;
+                int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
+                for(Component text : texts){
+                    guiGraphics.drawCenteredString(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-iay-(l*f), -1);
+                    l--;
                 }
-                l++;
+            } else {
+                int l = pos == 2 || pos == 3 ? 0 : texts.size()-1;
+                int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
+                for(Component text : texts){
+                    int x = pos == 2 || pos == 4 ? ix : guiGraphics.guiWidth() - ix - (ActionBarInfo.MINECRAFT.font.width(text));
+                    int y = pos == 2 || pos == 3 ? iy+(l*f) : guiGraphics.guiHeight() - iy - ActionBarInfo.MINECRAFT.font.lineHeight - (l*f);
+                    guiGraphics.drawString(ActionBarInfo.MINECRAFT.font, text, x, y, -1);
+                    if(pos == 2 || pos == 3) l++; else l--;
+                }
             }
         }
-    }
-
-    private void drawString(GuiGraphics guiGraphics, Component text, int x, int y) {
-        guiGraphics.drawString(this.client.font, text, x, y, 16777215);
     }
 }

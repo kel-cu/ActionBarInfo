@@ -5,15 +5,15 @@
   "version": "${version}",
   "description": "Display info in action bar",
   "authors": [
-    "Im_Kel (Kel Cuprum)"
+    "Kel Cuprum"
   ],
   "contact": {
-    "repo": "https://github.com/simply-kel/ActionBarInfo",
+    "repo": "https://github.com/kel-cu/ActionBarInfo",
     "homepage": "https://modrinth.com/mod/abi",
-    "issues": "https://github.com/simply-kel/ActionBarInfo/issues",
-    "email": "kel@simplykel.ru"
+    "issues": "https://github.com/kel-cu/ActionBarInfo/issues",
+    "email": "me@kelcuprum.ru"
   },
-  "license": "MIT",
+  "license": "GPL 3.0",
   "environment": "client",
   "entrypoints": {
     "client": [
@@ -25,16 +25,17 @@
   },
   "icon": "assets/actionbarinfo/icon.png",
   "depends": {
-    "fabricloader": ">=0.14.17",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": [">=1.20", "!>=1.20.2"]
+    "alinlib": "*",
+    "minecraft": [">=1.20.2"]
   },
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.actionbarinfo.github": "https://github.com/simply-kel/ActionBarInfo",
-        "modmenu.actionbarinfo.modrinth": "https://modrinth.com/mod/abi",
-        "modmenu.actionbarinfo.donate": "https://kelcuprum.ru/r/don"
+        "modmenu.github": "https://github.com/kel-cu/ActionBarInfo",
+        "modmenu.modrinth": "https://modrinth.com/mod/abi",
+        "modmenu.donate": "https://kelcu.ru/don"
       }
     }
   }
