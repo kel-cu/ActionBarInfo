@@ -4,7 +4,7 @@
   "abi.key.openConfig": "Открыть конфиги",
   "abi.key.toggle": "Переключение триггера",
 
-  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time}&r",
+  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
   "abi.config": "Конфигурация",
   "abi.config.enable_ab_information": "Включить Action Bar Info",

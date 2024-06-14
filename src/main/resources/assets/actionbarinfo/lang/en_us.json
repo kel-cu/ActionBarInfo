@@ -4,7 +4,7 @@
   "abi.key.openConfig": "Open Configs",
   "abi.key.toggle": "Toggle Trigger",
 
-  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time}&r",
+  "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
   "abi.config": "Configuration",
   "abi.config.enable_ab_information": "Enable Action Bar Info",
