@@ -33,7 +33,6 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.github": "https://github.com/kel-cu/ActionBarInfo",
         "modmenu.modrinth": "https://modrinth.com/mod/abi",
         "modmenu.donate": "https://kelcu.ru/don"
       }
