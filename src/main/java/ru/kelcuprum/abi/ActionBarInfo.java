@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
+import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
@@ -31,19 +32,21 @@ public class ActionBarInfo implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         config.load();
-        KeyMapping toggleKeyBind;
-        toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
-                "abi.key.toggle",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
-                "abi.name"
-        ));
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            assert client.player != null;
-            while (toggleKeyBind.consumeClick()) {
-                config.setBoolean("ENABLE", !config.getBoolean("ENABLE", true));
-                config.save();
-            }
+        AlinLibEvents.INIT.register(() -> {
+            KeyMapping toggleKeyBind;
+            toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
+                    "abi.key.toggle",
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
+                    "abi.name"
+            ));
+            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                assert client.player != null;
+                while (toggleKeyBind.consumeClick()) {
+                    config.setBoolean("ENABLE", !config.getBoolean("ENABLE", true));
+                    config.save();
+                }
+            });
         });
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
             log("Client started!");
