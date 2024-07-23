@@ -18,7 +18,7 @@ public class LocalizationConfigsScreen {
                 .addPanelWidget(new ButtonBuilder(Component.translatable("abi.config"), (s) -> AlinLib.MINECRAFT.setScreen(new MainConfigsScreen().build(parent))).setIcon(OPTIONS).setCentered(false).build())
                 .addPanelWidget(new ButtonBuilder(Component.translatable("abi.localization"), (s) -> AlinLib.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent))).setIcon(LIST).setCentered(false).build())
                 .addWidget(new TextBox(Component.translatable("abi.localization"), true))
-                .addWidget(new EditBoxBuilder(Component.translatable("abi.localization.info")).setLocalization(ActionBarInfo.localization, "info").build())
+                .addWidget(new EditBoxBuilder(Component.translatable("abi.localization.info")).setValue(ActionBarInfo.localization.getLocalization("info", false, false, false)).setConfig(ActionBarInfo.config, "INFO").build())
                 .addWidget(new ButtonBuilder(Component.translatable("abi.localization.more"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(new LocalizationConfigsScreen().build(parent)))).setIcon(LIST).build())
                 .build();
     }

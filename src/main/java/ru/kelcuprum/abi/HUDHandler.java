@@ -20,10 +20,8 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
             this.texts.clear();
             if (!ActionBarInfo.config.getBoolean("ENABLE", true)) return;
             if(ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue() > 5) return;
-            String[] args = ActionBarInfo.localization.getLocalization("info").split("\\\\n");
-            for (String arg : args) {
-                this.texts.add(Localization.toText(arg));
-            }
+            String[] args = ActionBarInfo.getMessage().split("\\\\n");
+            for (String arg : args) this.texts.add(Localization.toText(arg));
         } catch (Exception e){
             ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
         }

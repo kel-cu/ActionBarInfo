@@ -2,12 +2,14 @@
   "abi.name": "Action Bar Info",
 
   "abi.key.openConfig": "Открыть конфиги",
-  "abi.key.toggle": "Переключение триггера",
+  "abi.key.toggle": "Переключение видимости",
+  "abi.key.stopwatch": "Секундомер",
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
   "abi.config": "Конфигурация",
   "abi.config.enable_ab_information": "Включить Action Bar Info",
+  "abi.config.enable.stopwatch": "Секундомер",
   "abi.config.type_render_action_bar": "Тип рендера",
   "abi.config.intend_x": "Отступ по X",
   "abi.config.intend_y": "Отступ по Y",

@@ -11,13 +11,18 @@ import java.util.TimerTask;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
+import org.meteordev.starscript.value.Value;
+import org.meteordev.starscript.value.ValueMap;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
+import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.config.parser.StarScript;
 
 //#if FORGE
 //$$ @net.minecraftforge.fml.common.Mod("actionbarinfo")
@@ -48,11 +53,16 @@ public class ActionBarInfo
     public void init() {
         config.load();
         AlinLibEvents.INIT.register(() -> {
-            KeyMapping toggleKeyBind;
-            toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
+            KeyMapping toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
                     "abi.key.toggle",
                     InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
+                    "abi.name"
+            ));
+            KeyMapping toggleStopwatch = KeyMappingHelper.register(new KeyMapping(
+                    "abi.key.stopwatch",
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
                     "abi.name"
             ));
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -61,8 +71,19 @@ public class ActionBarInfo
                     config.setBoolean("ENABLE", !config.getBoolean("ENABLE", true));
                     config.save();
                 }
+
+                while (toggleStopwatch.consumeClick()) {
+                    if(stateStopwatch == 0 && !config.getBoolean("ENABLE.STOPWATCH", true)) return;
+                    stateStopwatch++;
+                    if(stateStopwatch == 1) startStopwatch = System.currentTimeMillis();
+                    if(stateStopwatch>2) stateStopwatch = 0;
+                }
             });
         });
+        LocalizationEvents.DEFAULT_PARSER_INIT.register((starScript -> starScript.ss.set("abi", new ValueMap()
+                        .set("stopwatch", () -> Value.string(getStopwatch()))
+                ))
+        );
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
             log("Client started!");
             start();
@@ -70,6 +91,29 @@ public class ActionBarInfo
             GuiRenderEvents.RENDER.register(hud);
             ClientTickEvents.START_CLIENT_TICK.register(hud);
         }));
+    }
+
+    public static String getMessage(){
+        StringBuilder builder = new StringBuilder(config.getString("INFO", ActionBarInfo.localization.getLocalization("info", false, true, false)));
+        if(stateStopwatch > 0) builder.append("\\n").append(getStopwatch());
+        return AlinLib.localization.getParsedText(Localization.fixFormatCodes(builder.toString()));
+    }
+
+    public static int stateStopwatch = 0;
+    public static long startStopwatch = 0;
+    public static long stopStopwatch = 0;
+
+    public static String getStopwatch() {
+        if (stateStopwatch == 0) startStopwatch = stopStopwatch = 0;
+        else if (stateStopwatch == 1) stopStopwatch = System.currentTimeMillis();
+
+        long milliseconds = stopStopwatch - startStopwatch;
+
+        int ms = (int) milliseconds % 1000;
+        int seconds = (int) (milliseconds / 1000) % 60;
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        return String.format("%02d:%02d:%02d,%03d", hours, minutes, seconds, ms);
     }
 
     //
@@ -123,7 +167,7 @@ public class ActionBarInfo
     public static void update() {
         try {
             if (MINECRAFT.level == null || MINECRAFT.player == null) return;
-            MINECRAFT.player.displayClientMessage(Localization.toText(localization.getLocalization("info").replace("\\n", " ")), true);
+            MINECRAFT.player.displayClientMessage(Localization.toText(getMessage().replace("\\n", " ")), true);
             if (lastException != null) lastException = null;
         } catch (Exception ex) {
             if (lastException == null || !lastException.equals(ex.getMessage())) {

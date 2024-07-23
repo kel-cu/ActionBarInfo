@@ -2,12 +2,14 @@
   "abi.name": "Action Bar Info",
 
   "abi.key.openConfig": "Open Configs",
-  "abi.key.toggle": "Toggle Trigger",
+  "abi.key.toggle": "Toggle Visibility",
+  "abi.key.stopwatch": "Stopwatch",
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
   "abi.config": "Configuration",
   "abi.config.enable_ab_information": "Enable Action Bar Info",
+  "abi.config.enable.stopwatch": "Stopwatch",
   "abi.config.type_render_action_bar": "Type of Renderer",
   "abi.config.intend_x": "X Indentation",
   "abi.config.intend_y": "Y Indentation",

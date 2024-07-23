@@ -20,7 +20,7 @@ public class MainConfigsScreen {
                 .addPanelWidget(new ButtonBuilder(Component.translatable("abi.localization"), (s) -> AlinLib.MINECRAFT.setScreen(new LocalizationConfigsScreen().build(parent))).setIcon(LIST).setCentered(false).build())
                 .addWidget(new TextBox(Component.translatable("abi.config"), true))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("abi.config.enable_ab_information"), true).setConfig(ActionBarInfo.config, "ENABLE").build())
-                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.localization.extended_coordinates"), false).setConfig(AlinLib.bariumConfig, "LOCALIZATION.EXTENDED_COORDINATES").build())
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("abi.config.enable.stopwatch"), true).setConfig(ActionBarInfo.config, "ENABLE.STOPWATCH").build())
                 .addWidget(new SelectorBuilder(Component.translatable("abi.config.type_render_action_bar")).setList(new String[]{
                         "Default",
                         "ABI Render",

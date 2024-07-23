@@ -55,6 +55,7 @@ remapJar {
 
 dependencies {
     // loom
+    implementation("meteordevelopment:starscript:0.3.4")
     implementation("com.google.code.gson:gson:2.10.1")
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings loom.layered() {
