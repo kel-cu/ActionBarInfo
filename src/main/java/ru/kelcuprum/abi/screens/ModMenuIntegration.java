@@ -1,3 +1,4 @@
+//#if FABRIC
 package ru.kelcuprum.abi.screens;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -13,3 +14,4 @@ public class ModMenuIntegration implements ModMenuApi {
         return new MainConfigsScreen()::build;
     }
 }
+//#endif

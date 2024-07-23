@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "*"
+issueTrackerURL = "https://github.com/simply-kel/actionbarinfo/issues"
+license="GPL 3.0"
+
+[[mods]]
+displayTest = "IGNORE_ALL_VERSION"
+modId = "actionbarinfo"
+version = "${version}"
+displayURL = "https://modrinth.com/mod/abi"
+displayName = "Action Bar Info"
+updateJSONURL = "https://api.modrinth.com/updates/abi/forge_updates.json"
+authors = "Kel Cuprum"
+description = "Display info in action bar"
+logoFile = "assets/actionbarinfo/icon.png"
+
+[[mixins]]
+config = "alinlib.mixin.json"
+
+[[dependencies.actionbarinfo]]
+modId = "forge"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.actionbarinfo]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_dependency}"
+ordering = "NONE"
+side = "BOTH"
