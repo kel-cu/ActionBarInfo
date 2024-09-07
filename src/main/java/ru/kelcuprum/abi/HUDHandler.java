@@ -11,6 +11,8 @@ import ru.kelcuprum.alinlib.config.Localization;
 
 import java.util.List;
 
+import static ru.kelcuprum.abi.ActionBarInfo.isShowInfo;
+
 public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     private final List<Component> texts = new ObjectArrayList<>();
 
@@ -18,7 +20,7 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     public void onStartTick(Minecraft client) {
         try {
             this.texts.clear();
-            if (!ActionBarInfo.config.getBoolean("ENABLE", true)) return;
+            if (!isShowInfo()) return;
             if(ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue() > 5) return;
             String[] args = ActionBarInfo.getMessage().split("\\\\n");
             for (String arg : args) this.texts.add(Localization.toText(arg));

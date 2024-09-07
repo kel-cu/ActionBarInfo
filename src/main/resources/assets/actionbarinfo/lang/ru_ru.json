@@ -9,6 +9,7 @@
 
   "abi.config": "Конфигурация",
   "abi.config.enable_ab_information": "Включить Action Bar Info",
+  "abi.config.ms4_moment": "Режим компаса (ЛООООООР МШ4 SHTO)",
   "abi.config.enable.stopwatch": "Секундомер",
   "abi.config.type_render_action_bar": "Тип рендера",
   "abi.config.intend_x": "Отступ по X",

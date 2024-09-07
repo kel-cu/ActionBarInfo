@@ -3,6 +3,9 @@ package ru.kelcuprum.abi;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +26,9 @@ import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
+
+import static net.minecraft.world.item.Items.AIR;
+import static net.minecraft.world.item.Items.COMPASS;
 
 //#if FORGE
 //$$ @net.minecraftforge.fml.common.Mod("actionbarinfo")
@@ -94,6 +100,7 @@ public class ActionBarInfo
     }
 
     public static String getMessage(){
+        if(AlinLib.MINECRAFT.player == null || AlinLib.MINECRAFT.level == null) return "";
         StringBuilder builder = new StringBuilder(config.getString("INFO", ActionBarInfo.localization.getLocalization("info", false, true, false)));
         if(stateStopwatch > 0) builder.append("\\n").append(getStopwatch());
         return AlinLib.localization.getParsedText(Localization.fixFormatCodes(builder.toString()));
@@ -158,10 +165,19 @@ public class ActionBarInfo
         TIMER.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (config.getBoolean("ENABLE", true) && (config.getNumber("TYPE_RENDER", 0).intValue() == 0 || config.getNumber("TYPE_RENDER", 0).intValue() > 5))
+                if (isShowInfo() && (config.getNumber("TYPE_RENDER", 0).intValue() == 0 || config.getNumber("TYPE_RENDER", 0).intValue() > 5))
                     update();
             }
         }, 20, 20);
+    }
+    public static boolean isShowInfo(){
+        if(config.getBoolean("MS4_MOMENT", false)) return getItemInHands().is(COMPASS);
+        else return config.getBoolean("ENABLE", true);
+    }
+
+    public static ItemStack getItemInHands(){
+            if(AlinLib.MINECRAFT.player == null) return AIR.getDefaultInstance();
+            return AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND).is(AIR) ? AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND) : AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
     }
 
     public static void update() {
