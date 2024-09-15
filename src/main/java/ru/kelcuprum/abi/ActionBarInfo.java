@@ -129,13 +129,6 @@ public class ActionBarInfo
     public void onInitializeClient() {
         init();
     }
-    //#elseif FORGE
-    //$$  public ActionBarInfo(){
-    //$$      init();
-    //$$      if (net.minecraftforge.fml.loading.FMLLoader.getDist() == net.minecraftforge.api.distmarker.Dist.CLIENT) {
-    //$$          registerScreen();
-    //$$      }
-    //$$  }
     //#elseif NEOFORGE
     //$$  public ActionBarInfo(){
     //$$      init();
@@ -147,19 +140,6 @@ public class ActionBarInfo
     //$$  }
     //#endif
 
-    //#if FORGE && MC < 12002
-    //$$ public void registerScreen(){
-    //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) new ru.kelcuprum.abi.screens.config.MainConfigsScreen()::build));
-    //$$ }
-    //#elseif FORGE && MC >= 12002
-    //$$ public void registerScreen(){
-    //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(new ru.kelcuprum.abi.screens.config.MainConfigsScreen()::build));
-    //$$ }
-    //#endif
     //
     public static void start() {
         TIMER.scheduleAtFixedRate(new TimerTask() {
@@ -171,13 +151,13 @@ public class ActionBarInfo
         }, 20, 20);
     }
     public static boolean isShowInfo(){
-        if(config.getBoolean("MS4_MOMENT", false)) return getItemInHands().is(COMPASS);
+        if(config.getBoolean("MS4_MOMENT", false)) return isCompass();
         else return config.getBoolean("ENABLE", true);
     }
 
-    public static ItemStack getItemInHands(){
-            if(AlinLib.MINECRAFT.player == null) return AIR.getDefaultInstance();
-            return AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND).is(AIR) ? AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND) : AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
+    public static boolean isCompass(){
+            if(AlinLib.MINECRAFT.player == null) return false;
+            return (AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND).is(COMPASS) || AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND).is(COMPASS));
     }
 
     public static void update() {

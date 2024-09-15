@@ -7,7 +7,6 @@
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
-  "abi.config": "Configuration",
   "abi.config.enable_ab_information": "Enable Action Bar Info",
   "abi.config.ms4_moment": "Compass Mode",
   "abi.config.enable.stopwatch": "Stopwatch",
