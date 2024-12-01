@@ -32,7 +32,6 @@ public class MainConfigsScreen {
                 .addWidget(new SliderBuilder(Component.translatable("abi.config.intend_x")).setDefaultValue(20).setConfig(ActionBarInfo.config, "INDENT_X").setMin(5).setMax(100).build())
                 .addWidget(new SliderBuilder(Component.translatable("abi.config.intend_y")).setDefaultValue(20).setConfig(ActionBarInfo.config, "INDENT_Y").setMin(5).setMax(100).build())
                 .addWidget(new SliderBuilder(Component.translatable("abi.config.intend_abi_y")).setDefaultValue(85).setConfig(ActionBarInfo.config, "INDENT_ABI_Y").setMin(5).setMax(150).build())
-                .addWidget(new TextBox(Component.translatable("abi.localization"), true))
                 .addWidget(new EditBoxBuilder(Component.translatable("abi.localization.info")).setValue(ActionBarInfo.localization.getLocalization("info", false, false, false)).setConfig(ActionBarInfo.config, "INFO").build())
                 .addWidget(new ButtonBuilder(Component.translatable("abi.localization.more"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).build())
                 .build();
