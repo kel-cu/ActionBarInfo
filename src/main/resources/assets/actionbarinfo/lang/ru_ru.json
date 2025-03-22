@@ -7,8 +7,9 @@
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
-  "abi.config.enable_ab_information": "Включить Action Bar Info",
-  "abi.config.ms4_moment": "Режим компаса (ЛООООООР МШ4 SHTO)",
+  "abi.configs": "Настройки",
+  "abi.config.enable_ab_information": "Включить ABI",
+  "abi.config.ms4_moment": "Режим компаса",
   "abi.config.enable.stopwatch": "Секундомер",
   "abi.config.type_render_action_bar": "Тип рендера",
   "abi.config.intend_x": "Отступ по X",
@@ -16,8 +17,17 @@
   "abi.config.intend_abi_y": "Отступ по Y (ABI Render)",
 
   "abi.localization": "Локализация",
-  "abi.localization.more": "Больше локализации (AlinLib)",
+  "abi.localization.more": "Локализации (AlinLib)",
   "abi.localization.info": "Формат информации",
+
+  "abi.modules": "Модули",
+  "abi.modules.mod": "%s (%s шт.)",
+  "abi.modules.enable": "Включить модуль",
+
+  "abi.module.default": "Стандартный",
+  "abi.module.legacy": "Поддержка легаси",
+  "abi.module.stopwatch": "Секундомер",
+  "abi.module.direction": "Поворот (Компас)",
 
   "modmenu.descriptionTranslation.actionbarinfo": "Отображение информации на панели действий"
 }

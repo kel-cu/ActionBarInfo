@@ -7,6 +7,7 @@
 
   "abi.info": "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r",
 
+  "abi.configs": "Options",
   "abi.config.enable_ab_information": "Enable Action Bar Info",
   "abi.config.ms4_moment": "Compass Mode",
   "abi.config.enable.stopwatch": "Stopwatch",
@@ -14,10 +15,18 @@
   "abi.config.intend_x": "X Indentation",
   "abi.config.intend_y": "Y Indentation",
   "abi.config.intend_abi_y": "Y Indentation (ABI Render)",
-
   "abi.localization": "Localization",
   "abi.localization.info": "Information Format",
-  "abi.localization.more": "More Localization (AlinLib)",
+  "abi.localization.more": "Localization (AlinLib)",
+
+  "abi.modules": "Modules",
+  "abi.modules.mod": "%s (%s modules)",
+  "abi.modules.enable": "Enable Module",
+
+  "abi.module.default": "Default",
+  "abi.module.legacy": "Support Legacy",
+  "abi.module.stopwatch": "Stopwatch",
+  "abi.module.direction": "Direction (Compass)",
 
   "modmenu.descriptionTranslation.actionbarinfo": "Display info in action bar"
 }

@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
+import ru.kelcuprum.abi.modules.ModulesManager;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Localization;
@@ -21,8 +22,8 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
         try {
             this.texts.clear();
             if (!isShowInfo()) return;
-            if(ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue() > 5) return;
-            String[] args = ActionBarInfo.getMessage().split("\\\\n");
+            if(ActionBarInfo.config.getNumber("TYPE_RENDER", 1).intValue()  < 1 || ActionBarInfo.config.getNumber("TYPE_RENDER", 1).intValue() > 5) return;
+            String[] args = ModulesManager.getText().getString().split("\\\\n");
             for (String arg : args) this.texts.add(Localization.toText(arg));
         } catch (Exception e){
             ActionBarInfo.log(e.getLocalizedMessage(), Level.ERROR);
@@ -30,7 +31,7 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
     }
     @Override
     public void onRender(GuiGraphics guiGraphics, float tickDelta) {
-        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER", 0).intValue();
+        int pos = ActionBarInfo.config.getNumber("TYPE_RENDER", 1).intValue();
         int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
         int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
         int iay = ActionBarInfo.config.getNumber("INDENT_ABI_Y", 85).intValue();

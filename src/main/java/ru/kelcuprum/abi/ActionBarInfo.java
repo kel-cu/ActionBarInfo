@@ -3,6 +3,8 @@ package ru.kelcuprum.abi;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,17 +14,17 @@ import java.util.TimerTask;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.glfw.GLFW;
-import org.meteordev.starscript.value.Value;
-import org.meteordev.starscript.value.ValueMap;
+import ru.kelcuprum.abi.modules.ModulesManager;
+import ru.kelcuprum.abi.modules.StopwatchModule;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
-import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 
 import static net.minecraft.world.item.Items.COMPASS;
 
@@ -46,7 +48,7 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     @Override
     public void onInitializeClient() {
         config.load();
-        AlinLibEvents.INIT.register(() -> {
+        ModulesManager.registerDefaultModules();
             KeyMapping toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
                     "abi.key.toggle",
                     InputConstants.Type.KEYSYM,
@@ -66,18 +68,13 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
                     config.save();
                 }
 
-                while (toggleStopwatch.consumeClick()) {
-                    if(stateStopwatch == 0 && !config.getBoolean("ENABLE.STOPWATCH", true)) return;
-                    stateStopwatch++;
-                    if(stateStopwatch == 1) startStopwatch = System.currentTimeMillis();
-                    if(stateStopwatch>2) stateStopwatch = 0;
+                while (toggleStopwatch.consumeClick() && config.getBoolean("module.actionbarinfo.stopwatch", true)) {
+                    if(StopwatchModule.stateStopwatch == 0 && !config.getBoolean("ENABLE.STOPWATCH", true)) return;
+                    StopwatchModule.stateStopwatch++;
+                    if(StopwatchModule.stateStopwatch == 1) StopwatchModule.startStopwatch = System.currentTimeMillis();
+                    if(StopwatchModule.stateStopwatch>2) StopwatchModule.stateStopwatch = 0;
                 }
             });
-        });
-        LocalizationEvents.DEFAULT_PARSER_INIT.register((starScript -> starScript.ss.set("abi", new ValueMap()
-                        .set("stopwatch", () -> Value.string(getStopwatch()))
-                ))
-        );
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
             log("Client started!");
             start();
@@ -87,36 +84,16 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
         }));
     }
 
+    @Deprecated
     public static String getMessage(){
-        if(AlinLib.MINECRAFT.player == null || AlinLib.MINECRAFT.level == null) return "";
-        StringBuilder builder = new StringBuilder(config.getString("INFO", ActionBarInfo.localization.getLocalization("info", false, true, false)));
-        if(stateStopwatch > 0) builder.append("\\n").append(getStopwatch());
-        return AlinLib.localization.getParsedText(Localization.fixFormatCodes(builder.toString()));
+        return "";
     }
-
-    public static int stateStopwatch = 0;
-    public static long startStopwatch = 0;
-    public static long stopStopwatch = 0;
-
-    public static String getStopwatch() {
-        if (stateStopwatch == 0) startStopwatch = stopStopwatch = 0;
-        else if (stateStopwatch == 1) stopStopwatch = System.currentTimeMillis();
-
-        long milliseconds = stopStopwatch - startStopwatch;
-
-        int ms = (int) milliseconds % 1000;
-        int seconds = (int) (milliseconds / 1000) % 60;
-        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
-        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
-        return String.format("%02d:%02d:%02d,%03d", hours, minutes, seconds, ms);
-    }
-
     //
     public static void start() {
         TIMER.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (isShowInfo() && (config.getNumber("TYPE_RENDER", 0).intValue() == 0 || config.getNumber("TYPE_RENDER", 0).intValue() > 5))
+                if (isShowInfo() && (config.getNumber("TYPE_RENDER", 1).intValue() == 0 || config.getNumber("TYPE_RENDER", 1).intValue() > 5))
                     update();
             }
         }, 20, 20);
@@ -134,7 +111,7 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     public static void update() {
         try {
             if (MINECRAFT.level == null || MINECRAFT.player == null) return;
-            MINECRAFT.player.displayClientMessage(Localization.toText(getMessage().replace("\\n", " ")), true);
+            MINECRAFT.player.displayClientMessage(ModulesManager.getText(), true);
             if (lastException != null) lastException = null;
         } catch (Exception ex) {
             if (lastException == null || !lastException.equals(ex.getMessage())) {
@@ -142,5 +119,9 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
                 lastException = ex.getMessage();
             }
         }
+    }
+
+    public interface Icons {
+        ResourceLocation MODULES = GuiUtils.getResourceLocation("actionbarinfo", "textures/gui/modules.png");
     }
 }
