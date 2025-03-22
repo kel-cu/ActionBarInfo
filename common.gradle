@@ -3,8 +3,7 @@ apply plugin: 'dev.architectury.loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 
-def mod_brand = project.name.endsWith("-common") ? 'common' : (loom.platform.get() as String).toLowerCase()
-assert mod_brand in ['fabric', 'forge', 'neoforge', 'common']
+def mod_brand = 'fabric'
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
@@ -14,9 +13,6 @@ preprocess {
     tabIndentation = true
 
     vars.put("MC", mcVersion)
-    vars.put("FABRIC", mod_brand == 'fabric' ? 1 : 0)
-    vars.put("FORGE", mod_brand == 'forge' ? 1 : 0)
-    vars.put("NEOFORGE", mod_brand == 'neoforge' ? 1 : 0)
 }
 
 repositories {
@@ -61,17 +57,11 @@ dependencies {
     mappings loom.layered() {
         officialMojangMappings()
     }
-    modImplementation "ru.kelcuprum.alinlib:AlinLib-${mod_brand}:${rootProject.alinlib}+mc${project.minecraft_version}"
+    modImplementation "ru.kelcuprum:AlinLib-${mod_brand}:${rootProject.alinlib}+mc${project.minecraft_version}"
 
-    if (mod_brand == 'fabric') {
-        modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
-        modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-        modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    } else if (mod_brand == 'neoforge') {
-        neoForge "net.neoforged:neoforge:${project.forge_version}"
-    } else {
-        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-    }
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 int JAVA_COMPATIBILITY

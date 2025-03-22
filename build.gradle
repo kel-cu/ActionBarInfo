@@ -13,16 +13,9 @@ plugins {
 }
 
 preprocess {
-    def mc1201_fabric = createNode('1.20.1-fabric', 1_20_01, '')
-    def mc1202_fabric = createNode('1.20.2-fabric', 1_20_02, '')
+    def mc121_fabric = createNode('1.21-fabric', 1_21_00, '')
 
-    def mc1205_neoforge = createNode('1.20.5-neoforge', 1_20_05, '')
-
-    mc1201_fabric.link(mc1201_fabric, null)
-    mc1201_fabric.link(mc1202_fabric, null)
-    mc1202_fabric.link(mc1202_fabric, null)
-
-    mc1201_fabric.link(mc1205_neoforge, null)
+    mc121_fabric.link(mc121_fabric, null)
 }
 
 publishing {

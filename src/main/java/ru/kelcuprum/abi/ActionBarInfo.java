@@ -4,8 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,21 +23,10 @@ import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
-import ru.kelcuprum.alinlib.config.parser.StarScript;
 
-import static net.minecraft.world.item.Items.AIR;
 import static net.minecraft.world.item.Items.COMPASS;
 
-//#if FORGE
-//$$ @net.minecraftforge.fml.common.Mod("actionbarinfo")
-//#elseif NEOFORGE
-//$$ @net.neoforged.fml.common.Mod("actionbarinfo")
-//#endif
-public class ActionBarInfo
-        //#if FABRIC
-        implements net.fabricmc.api.ClientModInitializer
-        //#endif
-{
+public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger("Action Bar Info");
     private static final Timer TIMER = new Timer();
     private static String lastException;
@@ -56,7 +43,8 @@ public class ActionBarInfo
     public static Localization localization = new Localization("abi", "config/ActionBarInfo/lang");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
 
-    public void init() {
+    @Override
+    public void onInitializeClient() {
         config.load();
         AlinLibEvents.INIT.register(() -> {
             KeyMapping toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
@@ -122,23 +110,6 @@ public class ActionBarInfo
         int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
         return String.format("%02d:%02d:%02d,%03d", hours, minutes, seconds, ms);
     }
-
-    //
-    //#if FABRIC
-    @Override
-    public void onInitializeClient() {
-        init();
-    }
-    //#elseif NEOFORGE
-    //$$  public ActionBarInfo(){
-    //$$      init();
-    //$$      if (net.neoforged.fml.loading.FMLLoader.getDist() == net.neoforged.api.distmarker.Dist.CLIENT) {
-    //$$          net.neoforged.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
-    //$$                  () -> (minecraftClient, screen) -> new ru.kelcuprum.abi.screens.config.MainConfigsScreen().build(screen));
-    //$$      }
-    //$$  }
-    //#endif
 
     //
     public static void start() {
