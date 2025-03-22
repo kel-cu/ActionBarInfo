@@ -9,7 +9,7 @@ public class DirectionModule extends AbstractModule {
         super("direction", "actionbarinfo", Component.translatable("abi.module.direction"), false);
     }
 
-    private static final String compass_text_simple = "S ] ------- [ SW ] ------- [ W ] ------- [ NW ] ------- [ N ] ------- [ NE ] ------- [ E ] ------- [ E ] ------- [ ";
+    private static final String compass_text_simple = "S ] ------- [ SW ] ------- [ W ] ------- [ NW ] ------- [ N ] ------- [ NE ] ------- [ E ] ------- [ SE ] ------- [ ";
     private static final String compass_text_triple = compass_text_simple + compass_text_simple + compass_text_simple;
     private static final int oneSideLength = 16;
 
