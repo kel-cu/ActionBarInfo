@@ -25,6 +25,7 @@
   "abi.modules.enable": "Включить модуль",
 
   "abi.module.default": "Стандартный",
+  "abi.config.stealth": "Отключать в режиме стелса",
   "abi.module.legacy": "Поддержка легаси",
   "abi.module.stopwatch": "Секундомер",
   "abi.module.direction": "Поворот (Компас)",

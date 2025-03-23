@@ -6,11 +6,13 @@ import ru.kelcuprum.abi.modules.abstracts.AbstractModule;
 import ru.kelcuprum.abi.modules.abstracts.Option;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.utils.StealthManager;
 
 public class DefaultModule extends AbstractModule {
     public DefaultModule() {
         super("default", "actionbarinfo", Component.translatable("abi.module.default"));
         options.add(new Option("INFO", ActionBarInfo.localization.getLocalization("info", false, false, false), Component.translatable("abi.localization.info"), Option.Type.STRING));
+        options.add(new Option("STEALTH", true, Component.translatable("abi.config.stealth"), Option.Type.BOOLEAN));
     }
 
     @Override
@@ -22,6 +24,6 @@ public class DefaultModule extends AbstractModule {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !ActionBarInfo.config.getBoolean("STEALTH", true) || !StealthManager.isStealthActive();
     }
 }

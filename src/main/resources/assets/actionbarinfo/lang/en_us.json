@@ -24,6 +24,7 @@
   "abi.modules.enable": "Enable Module",
 
   "abi.module.default": "Default",
+  "abi.config.stealth": "Disable with Stealth mode",
   "abi.module.legacy": "Support Legacy",
   "abi.module.stopwatch": "Stopwatch",
   "abi.module.direction": "Direction (Compass)",
