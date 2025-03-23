@@ -7,18 +7,21 @@ import ru.kelcuprum.abi.modules.abstracts.AbstractModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModulesManager {
     public static HashMap<String, ArrayList<String>> modsModules = new HashMap<>();
-    public static HashMap<String, AbstractModule> modules = new HashMap<>();
+    public static HashMap<String, AbstractModule> modulesID = new HashMap<>();
+    public static List<AbstractModule> modules = new ArrayList<>();
 
     public static void registerModule(AbstractModule module){
-        if(modules.containsKey(module.id)) ActionBarInfo.LOG.error("Регистрация модуля %s от мода %s была отменена, так как уже существует модуль под этим ID");
+        if(modulesID.containsKey(module.id)) ActionBarInfo.LOG.error("Регистрация модуля %s от мода %s была отменена, так как уже существует модуль под этим ID");
         else {
+            modules.add(module);
+            modulesID.put(module.id, module);
             ArrayList<String> list = modsModules.getOrDefault(module.mod_id, new ArrayList<>());
             list.add(module.id);
             modsModules.put(module.mod_id, list);
-            modules.put(module.id, module);
         }
     }
 
@@ -36,7 +39,7 @@ public class ModulesManager {
     public static Component getText(){
         MutableComponent component = Component.empty();
         boolean first = true;
-        for(AbstractModule module : modules.values()){
+        for(AbstractModule module : modules){
             if(module.isEnabled() && module.isEnabledByUser()){
                 if(!first) component.append(getSymbol());
                 else first = false;

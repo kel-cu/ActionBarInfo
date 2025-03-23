@@ -34,7 +34,7 @@ public class ModulesScreen {
         for(String mod_id : ModulesManager.modsModules.keySet()){
             ArrayList<String> modulesID = ModulesManager.modsModules.getOrDefault(mod_id, new ArrayList<>());
             ArrayList<AbstractModule> modules = new ArrayList<>();
-            for(String moduleID : modulesID) modules.add(ModulesManager.modules.get(moduleID));
+            for(String moduleID : modulesID) modules.add(ModulesManager.modulesID.get(moduleID));
             String name = FabricLoader.getInstance().isModLoaded(mod_id) ? FabricLoader.getInstance().getModContainer(mod_id).get().getMetadata().getName() : mod_id;
             builder.addWidget(new HorizontalRuleBuilder(Component.translatable("abi.modules.mod", name, modulesID.size())));
             for(AbstractModule module : modules){
