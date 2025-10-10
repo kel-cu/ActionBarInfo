@@ -17,6 +17,7 @@ import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.abi.modules.ModulesManager;
 import ru.kelcuprum.abi.modules.StopwatchModule;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.CommonUtils;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
@@ -49,15 +50,13 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     public void onInitializeClient() {
         config.load();
         ModulesManager.registerDefaultModules();
-            KeyMapping toggleKeyBind = KeyMappingHelper.register(new KeyMapping(
+            KeyMapping toggleKeyBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                     "abi.key.toggle",
-                    InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
                     "abi.name"
             ));
-            KeyMapping toggleStopwatch = KeyMappingHelper.register(new KeyMapping(
+            KeyMapping toggleStopwatch = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                     "abi.key.stopwatch",
-                    InputConstants.Type.KEYSYM,
                     GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
                     "abi.name"
             ));
