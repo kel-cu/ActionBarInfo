@@ -1,16 +1,16 @@
 apply plugin: 'maven-publish'
-apply plugin: 'dev.architectury.loom'
+apply plugin: 'net.fabricmc.fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 
 def mod_brand = 'fabric'
-archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
+archives_base_name = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
 int mcVersion = 1
 preprocess {
     mcVersion = vars.get()["MC"] as int
-    tabIndentation = true
+//    tabIndentation = true
 
     vars.put("MC", mcVersion)
 }
@@ -44,32 +44,27 @@ loom {
         }
     }
 }
-remapJar {
+//remapJar {
 //    remapperIsolation = true
-    injectAccessWidener = true
-}
+//    injectAccessWidener = true
+//}
 
 dependencies {
     // loom
     implementation("meteordevelopment:starscript:0.3.4")
     implementation("com.google.code.gson:gson:2.10.1")
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-    }
-    modImplementation "ru.kelcuprum:AlinLib-${mod_brand}:${rootProject.alinlib}+mc${project.minecraft_version}"
+//    mappings loom.layered() {/*
+//        officialMojangMappings()
+//    }*/
+        implementation "ru.kelcuprum:AlinLib-${mod_brand}:${rootProject.alinlib}+mc${project.minecraft_version}"
 
-    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+        implementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+        implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+        implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
-int JAVA_COMPATIBILITY
-if (mcVersion >= 12005) {
-    JAVA_COMPATIBILITY = 21
-} else {
-    JAVA_COMPATIBILITY = 17
-}
+int JAVA_COMPATIBILITY = 25
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
     it.options.release = JAVA_COMPATIBILITY

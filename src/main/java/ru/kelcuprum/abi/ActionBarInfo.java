@@ -1,10 +1,8 @@
 package ru.kelcuprum.abi;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -110,7 +108,7 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     public static void update() {
         try {
             if (MINECRAFT.level == null || MINECRAFT.player == null) return;
-            MINECRAFT.player.displayClientMessage(ModulesManager.getText(), true);
+            MINECRAFT.player.sendOverlayMessage(ModulesManager.getText());
             if (lastException != null) lastException = null;
         } catch (Exception ex) {
             if (lastException == null || !lastException.equals(ex.getMessage())) {
@@ -121,6 +119,6 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
     }
 
     public interface Icons {
-        ResourceLocation MODULES = GuiUtils.getResourceLocation("actionbarinfo", "textures/gui/modules.png");
+        Identifier MODULES = GuiUtils.getResourceLocation("actionbarinfo", "textures/gui/modules.png");
     }
 }

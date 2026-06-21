@@ -1,5 +1,6 @@
 {
   "abi.name": "Action Bar Info",
+  "key.category.minecraft.abi.name": "Action Bar Info",
 
   "abi.key.openConfig": "Open Configs",
   "abi.key.toggle": "Toggle Visibility",

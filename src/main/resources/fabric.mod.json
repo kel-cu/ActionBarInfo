@@ -26,7 +26,6 @@
   "icon": "assets/actionbarinfo/icon.png",
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
     "alinlib": "*",
     "minecraft": "${minecraft_dependency}"
   },

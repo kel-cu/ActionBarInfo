@@ -25,9 +25,9 @@ import static ru.kelcuprum.alinlib.gui.Icons.OPTIONS;
 public class ModulesScreen {
     public static Screen build(Screen parent){
         ConfigScreenBuilder builder =  new ConfigScreenBuilder(parent, Component.translatable("abi.name"))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.configs")).setCentered(false).setOnPress((s) -> AlinLib.MINECRAFT.setScreen(MainConfigsScreen.build(parent))).setIcon(OPTIONS))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.modules")).setCentered(false).setOnPress((s) -> AlinLib.MINECRAFT.setScreen(build(parent))).setIcon(MODULES))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.localization.more"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setCentered(false).setIcon(LIST).build())
+                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.configs")).setCentered(false).setOnPress((s) -> AlinLib.MINECRAFT.setScreenAndShow(MainConfigsScreen.build(parent))).setIcon(OPTIONS))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.modules")).setCentered(false).setOnPress((s) -> AlinLib.MINECRAFT.setScreenAndShow(build(parent))).setIcon(MODULES))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("abi.localization.more"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(LocalizationScreen.build(parent))).setCentered(false).setIcon(LIST).build())
 
                 .addWidget(new TextBuilder(Component.translatable("abi.modules")));
 

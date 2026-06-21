@@ -2,7 +2,7 @@ package ru.kelcuprum.abi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.abi.modules.ModulesManager;
@@ -12,6 +12,7 @@ import ru.kelcuprum.alinlib.config.Localization;
 
 import java.util.List;
 
+import static ru.kelcuprum.abi.ActionBarInfo.MINECRAFT;
 import static ru.kelcuprum.abi.ActionBarInfo.isShowInfo;
 
 public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
@@ -30,7 +31,8 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
         }
     }
     @Override
-    public void onRender(GuiGraphics guiGraphics, float tickDelta) {
+    public void onRender(GuiGraphicsExtractor guiGraphics, float tickDelta) {
+        if(MINECRAFT.level == null) return;
         int pos = ActionBarInfo.config.getNumber("TYPE_RENDER", 1).intValue();
         int ix = ActionBarInfo.config.getNumber("INDENT_X", 20).intValue();
         int iy = ActionBarInfo.config.getNumber("INDENT_Y", 20).intValue();
@@ -40,7 +42,7 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
                 int l = texts.size()-1;
                 int f = ActionBarInfo.MINECRAFT.font.lineHeight+3;
                 for(Component text : texts){
-                    guiGraphics.drawCenteredString(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-iay-(l*f), -1);
+                    guiGraphics.centeredText(ActionBarInfo.MINECRAFT.font, text, guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-iay-(l*f), -1);
                     l--;
                 }
             } else {
@@ -49,7 +51,7 @@ public class HUDHandler implements GuiRenderEvents, ClientTickEvents.StartTick {
                 for(Component text : texts){
                     int x = pos == 2 || pos == 4 ? ix : guiGraphics.guiWidth() - ix - (ActionBarInfo.MINECRAFT.font.width(text));
                     int y = pos == 2 || pos == 3 ? iy+(l*f) : guiGraphics.guiHeight() - iy - ActionBarInfo.MINECRAFT.font.lineHeight - (l*f);
-                    guiGraphics.drawString(ActionBarInfo.MINECRAFT.font, text, x, y, -1);
+                    guiGraphics.text(ActionBarInfo.MINECRAFT.font, text, x, y, -1);
                     if(pos == 2 || pos == 3) l++; else l--;
                 }
             }
