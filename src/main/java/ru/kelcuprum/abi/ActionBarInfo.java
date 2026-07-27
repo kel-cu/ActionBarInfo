@@ -17,7 +17,6 @@ import ru.kelcuprum.abi.modules.StopwatchModule;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.CommonUtils;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
-import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
@@ -60,6 +59,7 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
             ));
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 assert client.player != null;
+
                 while (toggleKeyBind.consumeClick()) {
                     config.setBoolean("ENABLE", !config.getBoolean("ENABLE", true));
                     config.save();
@@ -79,6 +79,7 @@ public class ActionBarInfo implements net.fabricmc.api.ClientModInitializer {
             GuiRenderEvents.RENDER.register(hud);
             ClientTickEvents.START_CLIENT_TICK.register(hud);
         }));
+        ClientLifecycleEvents.CLIENT_STOPPING.register((c) -> TIMER.cancel());
     }
 
     @Deprecated

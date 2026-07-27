@@ -4,7 +4,9 @@ apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 
 def mod_brand = 'fabric'
-archives_base_name = rootProject.archives_base_name + "-" + mod_brand
+base {
+    archivesName = rootProject.archives_base_name + "-" + mod_brand;
+}
 group = rootProject.maven_group
 
 int mcVersion = 1
